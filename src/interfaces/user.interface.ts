@@ -7,6 +7,6 @@ export default interface IUser {
   password: string;
   firstName: string;
   lastName: string;
-  posts?: Array<IPost>;
   following?: Array<string>;
+  posts?: Array<string>;
 }

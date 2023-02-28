@@ -5,9 +5,9 @@ interface IPost {
   message: string;
   userId: string;
   createdAt: Date;
-  commentList?: Array<IComment>;
   likes: number;
-  comments: number;
+  commentList?: Array<string>;
+  // comments: number;
 }
 
 export default IPost;

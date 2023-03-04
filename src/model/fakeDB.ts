@@ -10,7 +10,7 @@ const database: IDatabase = {
       firstName: "Bill",
       lastName: "Gates",
       following: [],
-      posts: ["1001"]
+      posts: ["1001"],
     },
     {
       id: "2",
@@ -20,7 +20,7 @@ const database: IDatabase = {
       firstName: "James",
       lastName: "Smith",
       following: ["1"],
-      posts: ["1002"]
+      posts: ["1002"],
     },
   ],
 
@@ -30,16 +30,14 @@ const database: IDatabase = {
       message: "Hi there",
       userId: "1",
       createdAt: new Date(),
-      likes: 2,
-      commentList: ["3001", "3002"]
+      comments: ["3001", "3002"],
     },
     {
       id: "1002",
       message: "this is a new post by me",
       userId: "2",
       createdAt: new Date(),
-      likes: 2,
-      commentList: []
+      comments: [],
     },
   ],
 
@@ -50,7 +48,6 @@ const database: IDatabase = {
       userId: "1",
       createdAt: new Date(),
       message: "this is a new comment",
-      parentCommentId: ""
     },
     {
       id: "3002",
@@ -58,9 +55,10 @@ const database: IDatabase = {
       userId: "2",
       createdAt: new Date(),
       message: "this is one more comment",
-      parentCommentId: ""
-    }
-  ]
+    },
+  ],
+
+  likes: [{ user_id: "1", post_id: "1002" }],
 };
 
-export { IDatabase };
+export { database };

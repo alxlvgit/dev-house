@@ -4,7 +4,6 @@ interface IComment {
   userId: string;
   postId: string;
   createdAt: Date;
-  parentCommentId: string;
 }
 
 export default IComment;

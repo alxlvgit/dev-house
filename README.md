@@ -14,6 +14,10 @@ Planning: Post & Posts
 3. Your `/posts` page should show your feed. (Probably start simple and just show all of your own posts…and then change this later to be an actual feed).	b. abling to view a single post. 
 4. You should be able to `View` a `single` post. When doing so, be sure to load up any comments associated with that post.v
 
+Royce Coviello:
+I worked on the following tasks:
+1. Planning out how to create the sign in page
+
 John Chen:
 I worked on the following tasks:
 

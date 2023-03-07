@@ -11,8 +11,8 @@ Selina Park:
 I worked on the following tasks: 
 1. Finalize the normalization of database: added votes.
 Planning: Post & Posts
-1. Your `/posts` page should show your feed. (Probably start simple and just show all of your own posts…and then change this later to be an actual feed).	b. abling to view a single post. 
-2. You should be able to `View` a `single` post. When doing so, be sure to load up any comments associated with that post.v
+3. Your `/posts` page should show your feed. (Probably start simple and just show all of your own posts…and then change this later to be an actual feed).	b. abling to view a single post. 
+4. You should be able to `View` a `single` post. When doing so, be sure to load up any comments associated with that post.v
 
 John Chen:
 I worked on the following tasks:

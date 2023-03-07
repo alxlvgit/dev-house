@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
-import { post, posts } from "../../../model/fakeDB";
+// import { post, posts } from "../../../model/fakeDB";
 
 class PostController implements IController {
   public path = "/posts";
@@ -21,12 +21,12 @@ class PostController implements IController {
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   private getAllPosts = (_: Request, res: Response) => {
-    res.render("post/views/posts", { posts });
+    // res.render("post/views/posts", { posts });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (request: Request, res: Response, next: NextFunction) => {
-    res.render("post/views/post", { post });
+    // res.render("post/views/post", { post });
   };
 
   // 🚀 These post methods needs to be implemented by you

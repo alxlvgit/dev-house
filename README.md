@@ -18,24 +18,12 @@ Royce Coviello:
 I worked on the following tasks:
 1. Planning out how to create the sign in page
 
-John Chen:
+
+March 13th (Second Sprint Complete)
+Oleksandr Levchuk:
 I worked on the following tasks:
-
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
-
-March 16th (Second Sprint Complete)
-Amy Chan:
-I worked on the following tasks:
-
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
-
-I also needed to research on Youtube and Google the following things:
-
-1. <Insert Video or Link to thing you needed to research>
+1. Configured Passport.js
+2. Initialized local strategy with Passport.js
 
 John Chen:
 I worked on the following tasks:

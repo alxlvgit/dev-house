@@ -17,7 +17,7 @@ class AuthenticationController implements IController {
     this.router.post(`${this.path}/register`, this.registration);
     this.router.get(`${this.path}/login`, forwardAuthenticated, this.showLoginPage);
     this.router.post(`${this.path}/login`, this.login());
-    this.router.post(`${this.path}/logout`, this.logout);
+    this.router.get(`${this.path}/logout`, this.logout);
   }
 
   private showLoginPage = (_: express.Request, res: express.Response) => {
@@ -38,7 +38,11 @@ class AuthenticationController implements IController {
   };
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => { };
-  private logout = async (req: express.Request, res: express.Response) => { };
+
+  private logout = (req: express.Request, res: express.Response) => {
+    req.logout((err: any) => console.log(err));
+    res.redirect("/");
+  };
 }
 
 export default AuthenticationController;

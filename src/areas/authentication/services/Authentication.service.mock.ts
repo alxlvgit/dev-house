@@ -5,21 +5,22 @@ import { IAuthenticationService } from "./IAuthentication.service";
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
 
-  public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null | Express.User> {
-    const userFoundByEmail = await this.findUserByEmail(email);
+  public getUserByEmailAndPassword(email: string, password: string): IUser | null {
+    const userFoundByEmail = this.findUserByEmail(email);
     if (userFoundByEmail) {
-      if (userFoundByEmail.password === password) return userFoundByEmail;
+      if (userFoundByEmail.password === password) {
+        return userFoundByEmail;
+      }
       throw new Error("Password is wrong. Please try again");
     }
-    return null;
   }
 
-  public async findUserByEmail(email: String): Promise<null | IUser | Express.User> {
+  public findUserByEmail(email: String): IUser | null {
     const user = this._db.users.find(user => user.email === email);
     if (user) {
       return user;
     } else {
-    throw new Error("Email is wrong");
+      throw new Error("User with that email doesn't exist");
     }
   }
 

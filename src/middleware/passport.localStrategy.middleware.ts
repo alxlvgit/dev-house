@@ -1,4 +1,4 @@
-import passport, { use } from "passport";
+import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { PassportStrategy } from '../interfaces/passport.strategy.interface';
 import { MockAuthenticationService } from "../areas/authentication/services/Authentication.service.mock";
@@ -24,9 +24,9 @@ passport.serializeUser(function (user: Express.User, done: ((error: any, email: 
     done(null, user.email);
 });
 
-passport.deserializeUser(async function (email: string, done: ((error: any, user: Express.User | false | null) => void)) {
+passport.deserializeUser(function (email: string, done: ((error: any, user: Express.User | false | null) => void)) {
     try {
-        const user = await authService.findUserByEmail(email);
+        const user = authService.findUserByEmail(email);
         return done(null, user);
     } catch (error) {
         return done(error.message, undefined);

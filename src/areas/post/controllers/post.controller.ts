@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, Router } from "express";
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 // import { post, posts } from "../../../model/fakeDB";
@@ -12,7 +13,7 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, this.getAllPosts);
+    this.router.get(this.path, ensureAuthenticated, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
@@ -20,8 +21,8 @@ class PostController implements IController {
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
-  private getAllPosts = (_: Request, res: Response) => {
-    // res.render("post/views/posts", { posts });
+  private getAllPosts = (req: Request, res: Response) => {
+    res.render("post/views/posts", { posts: [], user: req.user });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
@@ -30,9 +31,9 @@ class PostController implements IController {
   };
 
   // 🚀 These post methods needs to be implemented by you
-  private createComment = async (req: Request, res: Response, next: NextFunction) => {};
-  private createPost = async (req: Request, res: Response, next: NextFunction) => {};
-  private deletePost = async (req: Request, res: Response, next: NextFunction) => {};
+  private createComment = async (req: Request, res: Response, next: NextFunction) => { };
+  private createPost = async (req: Request, res: Response, next: NextFunction) => { };
+  private deletePost = async (req: Request, res: Response, next: NextFunction) => { };
 }
 
 export default PostController;

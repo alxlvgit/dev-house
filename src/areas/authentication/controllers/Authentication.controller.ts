@@ -20,8 +20,14 @@ class AuthenticationController implements IController {
     this.router.get(`${this.path}/logout`, this.logout);
   }
 
-  private showLoginPage = (_: express.Request, res: express.Response) => {
-    res.render("authentication/views/login");
+  private showLoginPage = (req: express.Request, res: express.Response) => {
+    const messages = (req.session as any).messages ? (req.session as any).messages : undefined;
+    if (messages) {
+      const latestMessage = messages[messages.length - 1];
+      delete (req.session as any).messages;
+      res.render("authentication/views/login", { errorMessage: latestMessage });
+    }
+    res.render("authentication/views/login", { errorMessage: null });
   };
 
   private showRegistrationPage = (_: express.Request, res: express.Response) => {

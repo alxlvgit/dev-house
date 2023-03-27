@@ -39,6 +39,6 @@ I worked on the following tasks:
 
 # March 27th (Third Sprint Complete)
 Selina Park:\
-1.
-2.
-3.
+1. Working on showing username (E.g., Bill) for comments.
+2. Working on GET /posts/:id/delete => Delete a specific Post (trigger by clicking the trash icon next to a post on the main feed)
+3. Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).

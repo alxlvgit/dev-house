@@ -42,3 +42,8 @@ Selina Park:\
 1. Working on showing username (E.g., Bill) for comments.
 2. Working on GET /posts/:id/delete => Delete a specific Post (trigger by clicking the trash icon next to a post on the main feed)
 3. Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
+
+Oleksandr Levchuk:\
+1. Added login and logout functionalities.
+2. Refactored Passport.js configuration and local strategy.
+3. Added the session storage for production(Redis).

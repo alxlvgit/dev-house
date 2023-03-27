@@ -1,6 +1,7 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { database } from "../../../model/fakeDB";
+
 import { getUsernameByUserId, getLikesByPostId } from "../../../areas/helpers/helpers";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
@@ -31,6 +32,7 @@ export class MockPostService implements IPostService {
   getAllPosts(username: string): IPost[] {
     // 🚀 Implement this yourself.
     try {
+      
       const loggedinUserID = "1";
       const users = database.users;
       let unsortedPostsArr = [];

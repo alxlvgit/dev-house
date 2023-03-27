@@ -30,7 +30,7 @@ class PostController implements IController {
       delete post.userId;
       return post;
     });
-    res.render("post/views/posts", { posts: updatedPosts });
+    res.render("post/views/posts", { posts: updatedPosts, user: req.user });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object

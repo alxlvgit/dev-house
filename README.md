@@ -10,9 +10,7 @@ I worked on the following tasks:
 Selina Park:\
 I worked on the following tasks: 
 1. Finalize the normalization of database: added votes.
-Planning: Post & Posts
-3. Your `/posts` page should show your feed. (Probably start simple and just show all of your own posts…and then change this later to be an actual feed).	b. abling to view a single post. 
-4. You should be able to `View` a `single` post. When doing so, be sure to load up any comments associated with that post.v
+3. Planning: Post & Posts
 
 Royce Coviello:\
 I worked on the following tasks:
@@ -26,9 +24,21 @@ I worked on the following tasks:
 1. Configured Passport.js
 2. Initialized local strategy with Passport.js
 
+Selina Park:\
+1. Worked on /posts page (showing all posts of currnely logged in user and their followers.
+2. Showing those posts in time (most recent to old) order.
+3. When click comment icon, it shows single post page.
+4. When viewing a single post, it loads up any comments associated with that post.
+
 John Chen:
 I worked on the following tasks:
 
 1. 
 2. 
+3.
+
+# March 27th (Third Sprint Complete)
+Selina Park:\
+1.
+2.
 3.

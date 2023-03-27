@@ -29,16 +29,15 @@ export class MockPostService implements IPostService {
     }
   }
 
-  getAllPosts(username: string): IPost[] {
+  getAllPosts(userName: string): IPost[] {
     // 🚀 Implement this yourself.
     try {
-      
-      const loggedinUserID = "1";
+      const loggedinUsername = userName; //billgates
       const users = database.users;
       let unsortedPostsArr = [];
 
       for (const user of users) {
-        if (loggedinUserID === user.id) {
+        if (loggedinUsername === user.username) {
           for (const post of user.posts) {
             const userName = getUsernameByUserId(user.id);
             unsortedPostsArr.push({ ...this.getPostByPostId(post), username: userName });
@@ -49,7 +48,7 @@ export class MockPostService implements IPostService {
           }
         }
       }
-      
+
       for (const post of unsortedPostsArr) {
         const likes = getLikesByPostId(post.id);
         post.likes = likes;

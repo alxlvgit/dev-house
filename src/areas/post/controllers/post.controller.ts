@@ -25,7 +25,9 @@ class PostController implements IController {
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   private getAllPosts = (req: Request, res: Response) => {
-    const posts = this._postService.getAllPosts("billgates");
+    console.log(`hello heloo~ ************************${req.user.username}`);
+
+    const posts = this._postService.getAllPosts(req.user.username);
     const updatedPosts = posts.map((post) => {
       delete post.userId;
       return post;

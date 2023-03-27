@@ -1,4 +1,3 @@
-import IPost from "./post.interface";
 
 export default interface IUser {
   id: string;

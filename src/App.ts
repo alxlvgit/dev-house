@@ -25,6 +25,19 @@ class App {
   private initializeMiddlewares() {
     require("./middleware/express.middlewares")(this._app);
     require("./middleware/passport.middlewares")(this._app);
+    
+    // For debugging purposes
+    this._app.use((req, res, next) => {
+      console.log(`User details are: `);
+      console.log(req.user);
+
+      console.log("Entire session object:");
+      console.log(req.session);
+
+      console.log(`Session details are: `);
+      console.log((req.session as any).passport);
+      next();
+    });
   }
 
   private initializeErrorHandling() {

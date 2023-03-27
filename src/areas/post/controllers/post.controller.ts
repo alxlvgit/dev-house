@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, Router } from "express";
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { PostViewModel } from "../viewmodels/post.viewmodel";
@@ -15,7 +16,7 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, this.getAllPosts);
+    this.router.get(this.path, ensureAuthenticated, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
     // this.router.get(`${this.path}/:id/delete`, this.deletePost);
     // this.router.post(`${this.path}/:id/comment`, this.createComment);

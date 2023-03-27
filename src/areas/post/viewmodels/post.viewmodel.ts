@@ -1,3 +1,5 @@
+import { database } from "../../../model/fakeDB";
+import { getUsernameByUserId } from "../../../areas/helpers/helpers";
 import IComment from "../../../interfaces/comment.interface";
 import IPost from "../../../interfaces/post.interface";
 
@@ -15,20 +17,18 @@ import IPost from "../../../interfaces/post.interface";
 
 export class PostViewModel {
   public postId: string;
-  public userId: string;
+  public username: string;
   public createdAt: Date;
   public message: string;
-  public comments: string;
-  public likes: string;
-  public commentList?: Array<IComment>;
+  public likes: number;
+  public comments?: (string | IComment)[];
 
   constructor(post: IPost) {
     this.postId = post.id;
-    this.userId = post.userId;
+    this.username = getUsernameByUserId(post.userId);
     this.createdAt = post.createdAt;
     this.message = post.message;
-    this.comments = post.comments?.toString();
-    this.likes = post.likes?.toString();
-    this.commentList = post.commentList;
+    this.comments = post.comments;
+    this.likes = database.likes.filter((like) => like.post_id == post.id).length;
   }
 }

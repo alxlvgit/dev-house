@@ -20,6 +20,9 @@
       src="https://code.jquery.com/jquery-2.1.1.min.js"
     ></script>
   </head>
+
+
+  
   <body class="bg-grey-light font-sans">
     <div
       class="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal"
@@ -236,6 +239,7 @@
             <div></div>
           </div>
           
+          
         <!-- Post begins -->
         <% posts.forEach(post => { %>
         <div class="flex bg-gray-100 mb-4 rounded-lg">
@@ -253,11 +257,7 @@
           <div class="w-7/8 p-3 pl-0">
             <div class="flex justify-between">
               <div>
-                <span class="font-bold"
-                  ><a href="#" class="text-black"
-                    ><%= post.userId %></a
-                  ></span
-                >
+                <span class="font-bold"><a href="#" class="text-black"> <%= post.username %> </a></span>
                 <span class="text-grey-dark">&middot;</span>
                 <span class="text-grey-dark"><%= post.createdAt %></span>
                 <span class="inline-block">
@@ -277,10 +277,10 @@
               <div class="pb-2">
                 <span class="mr-8"
                   ><a
-                    href="/posts/<%= post.postId %>"
+                    href="/posts/<%= post.id %>"
                     class="text-grey-dark hover:no-underline hover:text-blue-light"
                     ><i class="fa fa-comment fa-lg mr-2"></i> <%=
-                    post.commentList.length %></a
+                    post.comments.length %></a
                   ></span
                 
                 >
@@ -298,6 +298,12 @@
         </div>
         <% }) %>
         <!-- Post ends -->
+
+
+
+
+
+
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>

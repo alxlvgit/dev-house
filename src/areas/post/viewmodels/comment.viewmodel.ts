@@ -1,4 +1,4 @@
-import IComment from "../../interfaces/comment.interface";
+import IComment from "../../../interfaces/comment.interface";
 
 // The following is an (incomplete) example of what a view model may look like
 // The purpose of a view model is to format the incoming data from the database

@@ -2,7 +2,7 @@ import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { database } from "../../../model/fakeDB";
 
-import { getUsernameByUserId, getLikesByPostId } from "../../../areas/helpers/helpers";
+import { getUsernameByUserId, getLikesByPostId, getLikesByUserIdAndPostId } from "../../../areas/helpers/helpers";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
@@ -32,7 +32,7 @@ export class MockPostService implements IPostService {
   getAllPosts(userName: string): IPost[] {
     // 🚀 Implement this yourself.
     try {
-      const loggedinUsername = userName; //billgates
+      const loggedinUsername = userName;
       const users = database.users;
       let unsortedPostsArr = [];
 
@@ -53,7 +53,6 @@ export class MockPostService implements IPostService {
         const likes = getLikesByPostId(post.id);
         post.likes = likes;
       }
-
       const sortedPostsArr = unsortedPostsArr.sort((a, b) => b.createdAt - a.createdAt);
       return sortedPostsArr;
     } catch (error) {
@@ -72,6 +71,18 @@ export class MockPostService implements IPostService {
     } catch {
       // 🚀 Implement this yourself.
       throw new Error("Method not implemented.");
+    }
+  }
+
+  likeThePost = (user_id, post_id): void => {
+    const likesFromTheUser = getLikesByUserIdAndPostId(user_id, post_id);
+    if (!likesFromTheUser) {
+      database.likes.push({ user_id, post_id });
+      console.log("You have liked the post");
+    } else {
+      console.log("Removed like from the post");
+      const likeIndex = database.likes.findIndex((like) => like.user_id === user_id && like.post_id === post_id);
+      database.likes.splice(likeIndex, 1);
     }
   }
 

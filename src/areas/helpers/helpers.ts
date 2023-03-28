@@ -1,3 +1,4 @@
+import ILikes from "../../interfaces/likes.interface";
 import { database } from "../../model/fakeDB";
 
 export const getUsernameByUserId = (user_id): string => {
@@ -19,3 +20,11 @@ export const getLikesByPostId = (post_id): string => {
 
   return result.length.toString();
 };
+
+export const getLikesByUserIdAndPostId = (user_id, post_id): ILikes => {
+  const likes = database.likes;
+  const result = likes.filter((like) => like.user_id === user_id && like.post_id === post_id);
+  return result.length > 0 ? result[0] : null;
+}
+
+

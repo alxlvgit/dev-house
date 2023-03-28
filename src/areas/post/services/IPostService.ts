@@ -14,4 +14,8 @@ export default interface IPostService {
     message: { id: string; createdAt: string; userId: string; message: string },
     postId: string
   ): IPost | void;
+
+  likeThePost(
+    user_id: string, post_id: string
+  )
 }

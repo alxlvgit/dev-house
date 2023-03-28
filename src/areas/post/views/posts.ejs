@@ -9,26 +9,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-2.1.1.min.js"
-    ></script>
-  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
 
 
-  
-  <body class="bg-grey-light font-sans">
-    <div
-      class="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal"
-    >
-      <div class="w-full bg-white mb-4">    
-         <header class="flex-shrink-0 border-b" x-data="setup()">
-          <div class="flex items-center justify-between p-2">
-            <!-- Navbar left -->
-            <div class="flex items-center space-x-3">
-              <span class="p-2 text-xl font-semibold tracking-wider uppercase">devHouse</span>
-            </div>
+
+<body class="bg-grey-light font-sans">
+  <div class="container mx-auto flex flex-col lg:flex-row mt-3 text-sm leading-normal">
+    <div class="w-full bg-white mb-4">
+      <header class="flex-shrink-0 border-b" x-data="setup()">
+        <div class="flex items-center justify-between p-2">
+          <!-- Navbar left -->
+          <div class="flex items-center space-x-3">
+            <span class="p-2 text-xl font-semibold tracking-wider uppercase">devHouse</span>
+          </div>
 
           <!-- Mobile search box -->
           <div x-show.transition="isSearchBoxOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20"
@@ -129,50 +124,50 @@
               <div class="absolute right-0 p-1 bg-green-400 rounded-full bottom-3 animate-ping"></div>
               <div class="absolute right-0 p-1 bg-green-400 border border-white rounded-full bottom-3"></div>
 
-                <!-- Dropdown card -->
-                <div
-                  @click.away="isOpen = false"
-                  x-show.transition.opacity="isOpen"
-                  class="z-50 absolute mt-3 transform -translate-x-full bg-white rounded-md shadow-lg min-w-max"
-                >
-                  <div class="flex flex-col p-4 space-y-1 font-medium border-b">
-                    <span class="text-gray-800"><%=user.username%></span>
-                    <span class="text-sm text-gray-400"><%=user.email%></span>
-                  </div>
-                  <ul class="flex flex-col p-2 my-2 space-y-1">
-                    <li>
-                      <a href="#" class="block px-2 py-1 transition no-underline rounded-md hover:bg-gray-100">Settings</a>
-                    </li>
-                    <li>
-                      <a href="/auth/logout" class="block px-2 py-1 transition no-underline rounded-md hover:bg-gray-100">Logout</a>
-                    </li>
-                  </ul>
+              <!-- Dropdown card -->
+              <div @click.away="isOpen = false" x-show.transition.opacity="isOpen"
+                class="z-50 absolute mt-3 transform -translate-x-full bg-white rounded-md shadow-lg min-w-max">
+                <div class="flex flex-col p-4 space-y-1 font-medium border-b">
+                  <span class="text-gray-800">
+                    <%=user.username%>
+                  </span>
+                  <span class="text-sm text-gray-400">
+                    <%=user.email%>
+                  </span>
                 </div>
+                <ul class="flex flex-col p-2 my-2 space-y-1">
+                  <li>
+                    <a href="#"
+                      class="block px-2 py-1 transition no-underline rounded-md hover:bg-gray-100">Settings</a>
+                  </li>
+                  <li>
+                    <a href="/auth/logout"
+                      class="block px-2 py-1 transition no-underline rounded-md hover:bg-gray-100">Logout</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-        </header>
-        
-        <div class="p-5">
-          <div class="bg-white  mx-auto w-full sm:w-11/12 md:w-8/12 lg:w-6/12 rounded">
-            <div class="flex items-center justify-start gap-3 py-2 mx-3 border-b">
-              <img
-                class="w-12 h-12 rounded-full"
-                src="https://user-images.githubusercontent.com/76543451/103982284-0a6f0b00-5138-11eb-872b-0b9e70fc5c25.gif"
-              />
-              <form class="w-full" action="/posts" method="POST">
-                <input
-                  class="w-9/12 bg-gray-200 rounded-full px-3 py-2"
-                  name="postText"
-                  placeholder="What's on your mind, john?"
-                />
-                <input class="transition duration-500 ease-in-out hover:bg-red-600 transform w-2/12 rounded-full p-2 bg-gray-800 cursor-pointer text-gray-200" type="submit" value="Post">
-              </form>
-            </div>
-            <div></div>
+        </div>
+      </header>
+
+      <div class="p-5">
+        <div class="bg-white  mx-auto w-full sm:w-11/12 md:w-8/12 lg:w-6/12 rounded">
+          <div class="flex items-center justify-start gap-3 py-2 mx-3 border-b">
+            <img class="w-12 h-12 rounded-full"
+              src="https://user-images.githubusercontent.com/76543451/103982284-0a6f0b00-5138-11eb-872b-0b9e70fc5c25.gif" />
+            <form class="w-full" action="/posts" method="POST">
+              <input class="w-9/12 bg-gray-200 rounded-full px-3 py-2" name="postText"
+                placeholder="What's on your mind, john?" />
+              <input
+                class="transition duration-500 ease-in-out hover:bg-red-600 transform w-2/12 rounded-full p-2 bg-gray-800 cursor-pointer text-gray-200"
+                type="submit" value="Post">
+            </form>
           </div>
-          
-          
+          <div></div>
+        </div>
+
+
         <!-- Post begins -->
         <% posts.forEach(post=> { %>
           <div class="flex bg-gray-100 mb-4 rounded-lg">
@@ -184,50 +179,49 @@
               </div>
             </div>
 
-          <div class="w-7/8 p-3 pl-0">
-            <div class="flex justify-between">
-              <div>
-                <span class="font-bold"><a href="#" class="text-black"> <%= post.username %> </a></span>
-                <span class="text-grey-dark">&middot;</span>
-                <span class="text-grey-dark"><%= post.createdAt %></span>
-                <span class="inline-block">
-                  <form action="/delete" method="post">
-                    <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
-                    <button type="submit"><i class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
-                  </form>
-                  
-                </span>
-              </div>
+            <div class="w-7/8 p-3 pl-0">
+              <div class="flex justify-between">
+                <div>
+                  <span class="font-bold"><a href="#" class="text-black">
+                      <%= post.username %>
+                    </a></span>
+                  <span class="text-grey-dark">&middot;</span>
+                  <span class="text-grey-dark">
+                    <%= post.createdAt %>
+                  </span>
+                  <span class="inline-block">
+                    <form action="/delete" method="post">
+                      <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
+                      <button type="submit"><i
+                          class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
+                    </form>
 
-            </div>
-            <div>
-              <div class="mb-4">
-                <p class="mb-6"><%= post.message %></p>
+                  </span>
+                </div>
+
               </div>
-              <div class="pb-2">
-                <span class="mr-8"
-                  ><a
-                    href="/posts/<%= post.id %>"
-                    class="text-grey-dark hover:no-underline hover:text-blue-light"
-                    ><i class="fa fa-comment fa-lg mr-2"></i> <%=
-                    post.comments.length %></a
-                  ></span
-                
-                >
-                <span class="mr-8"
-                  ><a
-                    href="#"
-                    class="text-grey-dark hover:no-underline hover:text-red"
-                    ><i class="fa fa-heart fa-lg mr-2"></i> <%= post.likes
-                    %></a
-                  ></span
-                >
+              <div>
+                <div class="mb-4">
+                  <p class="mb-6">
+                    <%= post.message %>
+                  </p>
+                </div>
+                <div class="pb-2">
+                  <span class="mr-8"><a href="/posts/<%= post.id %>"
+                      class="text-grey-dark hover:no-underline hover:text-blue-light"><i
+                        class="fa fa-comment fa-lg mr-2"></i>
+                      <%= post.comments.length %>
+                    </a></span>
+                  <span class="mr-8"><a href="/posts/<%= post.id %>/like"
+                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2"></i>
+                      <%= post.likes %>
+                    </a></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <% }) %>
-        <!-- Post ends -->
+          <% }) %>
+            <!-- Post ends -->
 
 
 
@@ -250,5 +244,6 @@
         }
       }
     </script>
-  </body>
+</body>
+
 </html>

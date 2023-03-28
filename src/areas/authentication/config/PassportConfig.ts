@@ -3,26 +3,18 @@ import { PassportStrategy } from '../../../interfaces/passport.strategy.interfac
 import { MockAuthenticationService } from '../services/Authentication.service.mock';
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from '../services';
-import IUser from  '../../../interfaces/user.interface';
+import IUser from '../../../interfaces/user.interface';
 
 // Passport Configuration Class
 export default class PassportConfig {
-    private _strategies: PassportStrategy[];
-
-    constructor(strategy: PassportStrategy) {
-        this._strategies = [];
-        this.addStrategy(strategy);
+    constructor(strategies: PassportStrategy[]) {
+        this.addStrategies(strategies);
     }
 
-    private addAllStrategies(strategies: PassportStrategy[]): void {
+    private addStrategies(strategies: PassportStrategy[]): void {
         strategies.forEach((passportStrategy: PassportStrategy) => {
             passport.use(passportStrategy.name, passportStrategy.strategy);
         });
-    }
-
-    public addStrategy(strategy: PassportStrategy): void {
-        this._strategies.push(strategy);
-        this.addAllStrategies(this._strategies);
     }
 }
 

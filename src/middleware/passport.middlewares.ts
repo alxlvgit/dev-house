@@ -7,5 +7,6 @@ module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   const LocalStrategyConfiguration = new LocalStrategyConfig(new MockAuthenticationService());
-  new PassportConfig(LocalStrategyConfiguration.getConfiguredStrategy());
+  const LocalStrategyConfigured = LocalStrategyConfiguration.getConfiguredStrategy();
+  new PassportConfig([LocalStrategyConfigured]);
 };

@@ -23,7 +23,8 @@ export class MockPostService implements IPostService {
     } catch (error) {
       throw new Error("Method not implemented.");
     }
-  }
+>>>>>>> 057f411 (make post like/unlike functional)
+        }
 
   getAllPosts(username: string): IPost[] {
     try {

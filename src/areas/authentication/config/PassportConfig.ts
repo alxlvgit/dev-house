@@ -2,16 +2,16 @@ import passport from 'passport';
 import { PassportStrategy } from '../../../interfaces/passport.strategy.interface';
 import { MockAuthenticationService } from '../services/Authentication.service.mock';
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
+import { IAuthenticationService } from '../services';
+import IUser from  '../../../interfaces/user.interface';
 
 // Passport Configuration Class
 export default class PassportConfig {
     private _strategies: PassportStrategy[];
-    private _defaultStrategy: PassportStrategy;
 
-    constructor() {
+    constructor(strategy: PassportStrategy) {
         this._strategies = [];
-        this._defaultStrategy = new LocalStrategyConfig().getConfiguredStrategy();
-        this.addStrategy(this._defaultStrategy);
+        this.addStrategy(strategy);
     }
 
     private addAllStrategies(strategies: PassportStrategy[]): void {
@@ -27,8 +27,12 @@ export default class PassportConfig {
 }
 
 // Local Strategy Configuration Class
-class LocalStrategyConfig {
-    private static _authService = new MockAuthenticationService;
+export class LocalStrategyConfig {
+    private static _authService: IAuthenticationService;
+
+    constructor(authService: IAuthenticationService) {
+        LocalStrategyConfig._authService = authService;
+    }
 
     private configStrategy(): Strategy {
         return new LocalStrategy(
@@ -55,10 +59,10 @@ class LocalStrategyConfig {
     }
 
     private deserializeUser(): void {
-        passport.deserializeUser(function (email: string, done: ((error: any, user: Express.User | false | null) => void)) {
+        passport.deserializeUser(function (email: string, done: ((error: any, user: IUser | false | null) => void)) {
             try {
                 const user = LocalStrategyConfig._authService.findUserByEmail(email);
-                return done(null, user);
+                return done(null, user as IUser);
             } catch (error) {
                 return done(error.message, undefined);
             }

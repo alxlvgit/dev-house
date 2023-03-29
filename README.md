@@ -43,7 +43,7 @@ Oleksandr Levchuk:
 3. Added the session storage for production(Redis)
 
 Selina Park:
-1. Debugging Comments (done) 
+1. Debugged Comments part. (done) 
 2. Working on GET /posts/:id/delete => Delete a specific Post (trigger by clicking the trash icon next to a post on the main feed)
 3. Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
 

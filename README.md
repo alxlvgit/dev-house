@@ -46,7 +46,7 @@ Selina Park:
 1. Debugged Comments part. (done).
 2. Added GET /posts/:id/delete. When users click delete button on a specific Post, it deletes the following post.
 3. Changed getallpost method by using viewmodel for post. 
-! Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
+4. Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
 
 Royce Coviello:
 1. 

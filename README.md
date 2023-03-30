@@ -25,7 +25,7 @@ I worked on the following tasks:
 2. Initialized local strategy with Passport.js
 
 Selina Park
-1. Worked on /posts page (showing all posts of currnely logged in user and their followers.
+1. Worked on /posts page (showing all posts of currnely logged in user and their followers).
 2. Showing those posts in time (most recent to old) order.
 3. When click comment icon, it shows single post page.
 4. When viewing a single post, it loads up any comments associated with that post.
@@ -43,9 +43,10 @@ Oleksandr Levchuk:
 3. Added the session storage for production(Redis)
 
 Selina Park:
-1. Debugged Comments part. (done) 
-2. Working on GET /posts/:id/delete => Delete a specific Post (trigger by clicking the trash icon next to a post on the main feed)
-3. Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
+1. Debugged Comments part. (done).
+2. Added GET /posts/:id/delete. When users click delete button on a specific Post, it deletes the following post.
+3. Changed getallpost method by using viewmodel for post. 
+! Working onPOST /posts - Create a new Post (Triggered upon clicking the post button).
 
 Royce Coviello:
 1. 

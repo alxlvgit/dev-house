@@ -46,7 +46,7 @@ Selina Park:
 1. Debugged the comments section, and it's now functioning correctly.
 2. Added a new feature that allows users to delete a specific post by clicking on the delete button on the post's page.
 3. Changed the "getallpost" method by using a viewmodel for the post to make it more efficient.
-4. aDDED a feature that allows users to create a new post by clicking on the "post" button. This feature is triggered by an onPOST request to the server.
+4. Added a feature that allows users to create a new post by clicking on the "post" button. This feature is triggered by an onPOST request to the server.
 
 Royce Coviello:
 1. 

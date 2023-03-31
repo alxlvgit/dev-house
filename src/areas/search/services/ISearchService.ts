@@ -1,6 +1,7 @@
+import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
 
 export default interface ISearchService {
     searchPosts(username: string, searchTerm: string): IPost[];
-    // enhancePostSearchResults(posts: IPost[]): IPost[];
+    searchUsers(searchTerm: string, userId): IUser[];
 }

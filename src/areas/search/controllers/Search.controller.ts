@@ -21,8 +21,9 @@ export class SearchController implements IController {
 
     private getSearchResults = (req: Request, res: Response) => {
         const foundPosts = this._searchService.searchPosts(`${req.query.search}`, req.user.username);
-        if (foundPosts) {
-            res.render("search/views/search", { posts: foundPosts, user: req.user });
+        const foundUsers = this._searchService.searchUsers(`${req.query.search}`, req.user.username);
+        if (foundPosts || foundUsers) {
+            res.render("search/views/search", { posts: foundPosts, users: foundUsers });
         } else {
             res.redirect("/posts");
         }

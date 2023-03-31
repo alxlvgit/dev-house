@@ -2,6 +2,8 @@ import IPost from "../../../interfaces/post.interface";
 import IPostService from "../../../areas/post/services/IPostService";
 import ISearchService from "./ISearchService";
 import { getFnameLnameByUserId } from "../../../areas/helpers/helpers";
+import { database } from "../../../model/fakeDB";
+import IUser from "../../../interfaces/user.interface";
 
 
 export class MockSearchService implements ISearchService {
@@ -22,5 +24,18 @@ export class MockSearchService implements ISearchService {
             const { fname, lname } = getFnameLnameByUserId(post.userId);
             return { ...post, fname, lname };
         });
+    }
+
+    searchUsers(searchTerm: string, username): IUser[] {
+        const users = database.users;
+        const usersSearchResult = users.filter(user => (user.firstName.toUpperCase()).includes(searchTerm.toUpperCase()) || (user.lastName.toUpperCase()).includes(searchTerm.toUpperCase()));
+        return usersSearchResult.length > 0 ? this.getUsersEnhanced(username, usersSearchResult) : null;
+    }
+
+    private getUsersEnhanced(username: string, users: IUser[]) {
+        const followedByCurrentUser = database.users.find(user => user.username === username).following;
+        return users.map(user => {
+            return { ...user, isFollowed: followedByCurrentUser.includes(user.id) };
+        })
     }
 }

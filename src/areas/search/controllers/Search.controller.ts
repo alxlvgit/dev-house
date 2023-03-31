@@ -17,6 +17,7 @@ export class SearchController implements IController {
 
     private initializeRoutes() {
         this.router.get(this.path, ensureAuthenticated, this.getSearchResults);
+        this.router.get(`${this.path}/:user_id/follow`, ensureAuthenticated, this.followUnfollowTheUser);
     }
 
     private getSearchResults = (req: Request, res: Response) => {
@@ -28,6 +29,11 @@ export class SearchController implements IController {
             res.redirect("/posts");
         }
     };
+
+    private followUnfollowTheUser = (req: Request, res: Response) => {
+        this._searchService.followUnfollowTheUser(req.params.user_id, req.user.username);
+        res.redirect("back");
+    }
 }
 
 

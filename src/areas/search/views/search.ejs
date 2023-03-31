@@ -43,11 +43,14 @@
                 <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic">
                   <button
                     class="text-pink-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                    type="button" style="transition: all 0.15s ease">
+                    type="submit" style="transition: all 0.15s ease">
                     <% if (user.isFollowed) { %>
-                      <i class="fa fa-heart mr-2"></i> Following
+                      <a href="/search/<%= user.id %>/follow">
+                        <i class="fa fa-heart mr-2"></i>Following</a>
                       <% } else{ %>
-                        <i class="fa fa-heart-o mr-2"></i> Follow
+                        <a href="/search/<%= user.id %>/follow">
+                          <i class="fa fa-heart-o mr-2"></i> Follow
+                        </a>
                         <% } %>
                   </button>
                 </div>

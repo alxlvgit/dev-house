@@ -26,7 +26,7 @@ export class MockSearchService implements ISearchService {
         });
     }
 
-    searchUsers(searchTerm: string, username): IUser[] {
+    searchUsers(searchTerm: string, username: string): IUser[] {
         const users = database.users;
         const usersSearchResult = users.filter(user => (user.firstName.toUpperCase()).includes(searchTerm.toUpperCase()) || (user.lastName.toUpperCase()).includes(searchTerm.toUpperCase()));
         return usersSearchResult.length > 0 ? this.getUsersEnhanced(username, usersSearchResult) : null;
@@ -37,5 +37,19 @@ export class MockSearchService implements ISearchService {
         return users.map(user => {
             return { ...user, isFollowed: followedByCurrentUser.includes(user.id) };
         })
+    }
+
+    followUnfollowTheUser = (user_id: string, currentUserUsername: string): void => {
+        const currentUser = database.users.find(user => user.username === currentUserUsername);
+        const usersFollowedByCurrentUser = currentUser.following;
+        const indexOfCurrentUser = database.users.findIndex(user => user.username === currentUserUsername);
+        if (!usersFollowedByCurrentUser.includes(user_id)) {
+            database.users[indexOfCurrentUser].following.push(user_id);
+            console.log(`Started following the user with id: ${user_id}`);
+        } else {
+            console.log("Unfollowed the user");
+            const indexOfUserToUnfollow = database.users[indexOfCurrentUser].following.findIndex((userID) => user_id === userID);
+            database.users[indexOfCurrentUser].following.splice(indexOfUserToUnfollow, 1);
+        }
     }
 }

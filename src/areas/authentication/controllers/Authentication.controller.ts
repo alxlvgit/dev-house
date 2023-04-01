@@ -8,7 +8,7 @@ class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
 
-  constructor(service: IAuthenticationService) {
+  constructor(private service: IAuthenticationService) {
     this.initializeRoutes();
   }
 
@@ -43,7 +43,30 @@ class AuthenticationController implements IController {
     });
   };
 
-  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => { };
+  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.log(req.body)
+    try {
+      const { email, password, firstName, lastName } = req.body;
+      const username = email.split("@")[0]
+      const user = await this.service.createUser({ username, email, password, firstName, lastName });
+
+      // render success message or redirect to login page
+  //     res.redirect("login");
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  //  };
+      req.login(user, (err) => {
+        if (err) {
+          next(err);
+        } else {
+          res.redirect("/posts");
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   private logout = (req: express.Request, res: express.Response) => {
     req.logout((err: any) => console.log(err));

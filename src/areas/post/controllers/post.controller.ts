@@ -19,7 +19,7 @@ class PostController implements IController {
     this.router.get(this.path, ensureAuthenticated, this.getAllPosts);
     this.router.get(`${this.path}/:id`, this.getPostById);
     // this.router.get(`${this.path}/:id/delete`, this.deletePost);
-    this.router.post(`${this.path}/:id/comment`, this.createComment);
+    this.router.post(`${this.path}/:id/comment`, ensureAuthenticated, this.createComment);
     // this.router.post(`${this.path}`, this.createPost);
   }
 

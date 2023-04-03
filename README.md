@@ -1,5 +1,5 @@
 Breakdown of Work:
-//////////////////////////////////////////////////////////////////////////////////////////
+
 # March 6th (First Sprint Complete)
 
 Oleksandr Levchuk
@@ -14,7 +14,7 @@ I worked on the following tasks:
 Royce Coviello
 I worked on the following tasks:
 1. Planning out how to create the sign in page
-//////////////////////////////////////////////////////////////////////////////////////////
+
 # March 13th (Second Sprint Complete)
 
 Oleksandr Levchuk
@@ -33,7 +33,7 @@ Royce Coviello:
 1. 
 2. 
 3.
-//////////////////////////////////////////////////////////////////////////////////////////
+
 # March 27th (Third Sprint Complete)
 
 Oleksandr Levchuk:
@@ -52,7 +52,7 @@ Royce Coviello:
 1. 
 2. 
 3.
-//////////////////////////////////////////////////////////////////////////////////////////
+
 # April 3rd (Fourth Sprint Complete)
 
 Oleksandr Levchuk:
@@ -64,9 +64,9 @@ Oleksandr Levchuk:
 
 Selina Park:
 I worked on the following tasks:
-1. Debugged deleting post.
-2. Debugged adding new post. 
-
+1. Debugged deleting post: Issue was that deleting post function was working with already-existing posts. However, couldn't delete newly-created posts.
+2. Debugged adding new post: Issue was that when all posts were deleted, adding new post function didn't work. 
+3. Fixed showallposts functions by implementing viewmodel. 
 
 Royce Coviello:
 1. 

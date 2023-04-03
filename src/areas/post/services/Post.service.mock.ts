@@ -75,10 +75,23 @@ export class MockPostService implements IPostService {
     }
   }
 
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+  addCommentToPost(message: string, userId: string, postId: string): void {
+    const maxId = Math.max(...database.comments.map(comment => parseInt(comment.id)));
+    const newId = (maxId + 1).toString();
+    const username = database.users.find(user => user.id == userId).username;
+    const newComment = {
+      id: newId,
+      createdAt: new Date(),
+      userId: userId,
+      postId: postId,
+      message: message,
+      username: username
+    }
+    database.comments.push(newComment);
+    const post = database.posts.find(post => post.id == postId);
+    post.comments.push(newId);
   }
+
   sortPosts(posts: IPost[]): IPost[] {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");

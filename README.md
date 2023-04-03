@@ -52,3 +52,23 @@ Royce Coviello:
 1. 
 2. 
 3.
+
+# April 3rd (Fourth Sprint Complete)
+
+Oleksandr Levchuk:
+1. Refactored Passport.js configuration and local strategy to follow the SOLID principles.
+2. Made like/unlike icon functional - users can like or unlike the post by clicking on the icon. 
+3. Implemented searching - users can input a search term and find the posts and other registered users that match the search key.
+4. Added follow/unfollow functionality - on the page with search results users can follow or unfollow the other users in the list.
+5. Added comments creation feature - users can add comments under the posts.
+
+Selina Park:
+1.
+2.
+3.
+
+
+Royce Coviello:
+1. 
+2. 
+3.

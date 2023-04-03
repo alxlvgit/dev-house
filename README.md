@@ -21,8 +21,8 @@ I worked on the following tasks:
 
 Oleksandr Levchuk
 I worked on the following tasks:
-1. Configured Passport.js
-2. Initialized local strategy with Passport.js
+1. Configured Passport.js to integrate the authentication services.
+2. Initialized local strategy with Passport.js as a primary authentication strategy for the application.
 
 Selina Park
 1. Worked on the "/posts" page that displays all posts of the currently logged-in user and their followers.
@@ -38,9 +38,9 @@ Royce Coviello:
 # March 27th (Third Sprint Complete)
 
 Oleksandr Levchuk:
-1. Added login and logout functionalities.
-2. Refactored Passport.js configuration and local strategy.
-3. Added the session storage for production(Redis)
+1. Added login and logout functionalities (user session creation, login and logout routes and handlers, displaying error messages on login).
+2. Refactored Passport.js configuration and local strategy (Passport.js and local strategy config written in OOP way).
+3. Added the session storage for production (Redis session storage will be used when env variable is set to "Production").
 
 Selina Park:
 1. Debugged the comments section, and it's now functioning correctly.

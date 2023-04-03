@@ -1,5 +1,5 @@
 Breakdown of Work:
-
+//////////////////////////////////////////////////////////////////////////////////////////
 # March 6th (First Sprint Complete)
 
 Oleksandr Levchuk
@@ -10,13 +10,11 @@ I worked on the following tasks:
 Selina Park
 I worked on the following tasks: 
 1. Conducted finalization of database normalization by adding votes, ensuring optimal functionality.
-3. Planned for the /posts page, showcasing all posts of the currently logged in user and their followers, in a time-based order, from most recent to old.
 
 Royce Coviello
 I worked on the following tasks:
 1. Planning out how to create the sign in page
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
 # March 13th (Second Sprint Complete)
 
 Oleksandr Levchuk
@@ -25,6 +23,7 @@ I worked on the following tasks:
 2. Initialized local strategy with Passport.js as a primary authentication strategy for the application.
 
 Selina Park
+I worked on the following tasks:
 1. Worked on the "/posts" page that displays all posts of the currently logged-in user and their followers.
 2. Showed the posts in a time-based order, with the most recent ones appearing first.
 3. Made it so that when the user clicks on the comment icon, it shows a single post page.
@@ -34,7 +33,7 @@ Royce Coviello:
 1. 
 2. 
 3.
-
+//////////////////////////////////////////////////////////////////////////////////////////
 # March 27th (Third Sprint Complete)
 
 Oleksandr Levchuk:
@@ -43,6 +42,7 @@ Oleksandr Levchuk:
 3. Added the session storage for production (Redis session storage will be used when env variable is set to "Production").
 
 Selina Park:
+I worked on the following tasks:
 1. Debugged the comments section, and it's now functioning correctly.
 2. Added a new feature that allows users to delete a specific post by clicking on the delete button on the post's page.
 3. Changed the "getallpost" method by using a viewmodel for the post to make it more efficient.
@@ -52,7 +52,7 @@ Royce Coviello:
 1. 
 2. 
 3.
-
+//////////////////////////////////////////////////////////////////////////////////////////
 # April 3rd (Fourth Sprint Complete)
 
 Oleksandr Levchuk:
@@ -63,9 +63,9 @@ Oleksandr Levchuk:
 5. Added comments creation feature - users can add comments under the posts.
 
 Selina Park:
-1.
-2.
-3.
+I worked on the following tasks:
+1. Debugged deleting post.
+2. Debugged adding new post. 
 
 
 Royce Coviello:

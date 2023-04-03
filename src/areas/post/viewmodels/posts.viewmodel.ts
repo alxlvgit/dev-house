@@ -1,5 +1,6 @@
 import IComment from "../../../interfaces/comment.interface";
 import IPost from "../../../interfaces/post.interface";
+import { database } from "../../../model/fakeDB";
 
 export class PostsViewModel {
   public postId: string;
@@ -17,11 +18,22 @@ export class PostsViewModel {
     this.createdAt = post.createdAt;
     this.message = post.message;
     this.comments = post.comments?.toString();
-    this.likes = post.likes?.toString();
+    this.likes = this.getLikesByPostId(post.id);
     // this.commentList = post.comments;
   }
 
-  getUsernameByUserId(id): string {
-    return "";
+  public getUsernameByUserId(user_id): string {
+    const users = database.users;
+    for (const user of users) {
+      if (user_id === user.id) {
+        return user.firstName;
+      }
+    }
   }
+
+  public getLikesByPostId = (post_id): string => {
+    const likes = database.likes;
+    const result = likes.filter((like) => like.post_id === post_id);
+    return result.length.toString();
+  };
 }

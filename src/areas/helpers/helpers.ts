@@ -1,21 +1,27 @@
 import { database } from "../../model/fakeDB";
 
-export const getUsernameByUserId = (user_id): string => {
-  const users = database.users;
-  for (const user of users) {
-    if (user_id === user.id) {
-      return user.firstName;
-    }
-  }
+const getUsernameByUserId = (user_id: string): string | null => {
+  const user = database.users.find((user) => user.id === user_id);
+  return user ? user.firstName : null;
 };
 
-export const getLikesByPostId = (post_id): string => {
-  const likes = database.likes;
-  const result = likes.filter((like) => like.post_id === post_id);
-  //if the post_id : "1001" then, the result =
-  /*
-   [{ user_id: "3", post_id: "1001" }, { user_id: "4", post_id: "1001" }]
-  */
-
-  return result.length.toString();
+const getLikesByPostId = (post_id): string => {
+  const likes = database.likes.filter((like) => like.post_id === post_id);
+  return likes.length.toString();
 };
+
+const getPostByPostId = (post_id): object => {
+  const post = database.posts.find((post) => post.id === post_id);
+  return post ? post : null;
+};
+
+const getPostByUserId = (user_id): object => {
+  const post = database.posts.find((post) => post.userId === user_id);
+  return post ? post : null;
+};
+
+const getUserIdByUsername = (username: string): string => {
+  const user = database.users.find((user) => user.username === username);
+  return user ? user.id : null;
+};
+export { getUsernameByUserId, getLikesByPostId, getPostByPostId, getPostByUserId, getUserIdByUsername };

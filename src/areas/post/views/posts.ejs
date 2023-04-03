@@ -191,7 +191,7 @@
                 <span class="text-grey-dark">&middot;</span>
                 <span class="text-grey-dark"><%= post.createdAt %></span>
                 <span class="inline-block">
-                  <form action="/delete" method="post">
+                  <form action="/posts/<%= post.postId %>/delete" method="post">
                     <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
                     <button type="submit"><i class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
                   </form>
@@ -207,7 +207,7 @@
               <div class="pb-2">
                 <span class="mr-8"
                   ><a
-                    href="/posts/<%= post.id %>"
+                    href="/posts/<%= post.postId %>"
                     class="text-grey-dark hover:no-underline hover:text-blue-light"
                     ><i class="fa fa-comment fa-lg mr-2"></i> <%=
                     post.comments.length %></a

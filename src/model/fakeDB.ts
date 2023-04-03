@@ -116,6 +116,7 @@ const database: IDatabase = {
       userId: "1",
       createdAt: new Date(),
       message: "this is a new comment",
+      username: "billgates"
     },
     {
       id: "3002",
@@ -123,6 +124,7 @@ const database: IDatabase = {
       userId: "2",
       createdAt: new Date(),
       message: "this is one more comment",
+      username: "james123"
     },
   ],
 

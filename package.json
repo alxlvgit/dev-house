@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/passport": "^1.0.12",
+    "@types/passport-local": "^1.0.35",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
@@ -36,8 +38,6 @@
     "@types/express-session": "^1.17.3",
     "@types/node": "^14.18.40",
     "@types/node-fetch": "^2.5.7",
-    "@types/passport": "^1.0.6",
-    "@types/passport-local": "^1.0.33",
     "ts-node-dev": "^1.1.6"
   }
 }

@@ -1,60 +1,58 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { database } from "../../../model/fakeDB";
+import {
+  getUsernameByUserId,
+  getLikesByPostId,
+  getPostByPostId,
+  getPostByUserId,
+} from "../../../areas/helpers/helpers";
+
 
 import { getUsernameByUserId, getLikesByPostId, getLikesByUserIdAndPostId } from "../../../areas/helpers/helpers";
 
-// ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
   addPost(post: IPost, username: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
-  }
-
-  private getPostByPostId(post_id): object {
-    const posts = database.posts;
-    for (const post of posts) {
-      if (post.id === post_id) {
-        return post;
-      }
-    }
-  }
-
-  private getPostByUserId(user_id): object {
-    const posts = database.posts;
-    for (const post of posts) {
-      if (user_id === post.userId) {
-        return post;
-      }
-    }
-  }
-
-  getAllPosts(userName: string): IPost[] {
-    // 🚀 Implement this yourself.
     try {
-      const loggedinUsername = userName;
-      const users = database.users;
-      let unsortedPostsArr = [];
-
-      for (const user of users) {
-        if (loggedinUsername === user.username) {
-          for (const post of user.posts) {
-            const userName = getUsernameByUserId(user.id);
-            unsortedPostsArr.push({ ...this.getPostByPostId(post), username: userName });
-          }
-          for (const following of user.following) {
-            const userName = getUsernameByUserId(following);
-            unsortedPostsArr.push({ ...this.getPostByUserId(following), username: userName });
-          }
+      database.posts.push(post);
+      for (let i = 0; i < database.users.length; i++) {
+        if (database.users[i].username === username) {
+          database.users[i].posts.push(post.id);
         }
       }
+    } catch (error) {
+      throw new Error("Method not implemented.");
+    }
+  }
 
-      for (const post of unsortedPostsArr) {
-        const likes = getLikesByPostId(post.id);
-        post.likes = likes;
+  getAllPosts(username: string): IPost[] {
+    try {
+      let posts = [];
+
+      for (const user of database.users) {
+        if (username === user.username) {
+          for (const post of user.posts) {
+            if (getPostByUserId(user.id)) {
+              posts.
+              push({ ...getPostByPostId(post) });
+            }
+            for (const following of user.following) {
+              const userName = getUsernameByUserId(following);
+              if (getPostByUserId(following)) {
+                posts.push({ ...getPostByUserId(following) });
+              }
+            }
+          }
+        }
+
+        for (const post of posts) {
+          const likes = getLikesByPostId(post.id);
+          post.likes = likes;
+        }
+
+        // hack to fix delete issue for now
+        return this.sortPosts(posts).filter((obj) => obj.id);
       }
-      const sortedPostsArr = unsortedPostsArr.sort((a, b) => b.createdAt - a.createdAt);
-      return sortedPostsArr;
     } catch (error) {
       throw new Error("Method not implemented.");
     }
@@ -69,10 +67,10 @@ export class MockPostService implements IPostService {
       );
       return clonedPost;
     } catch {
-      // 🚀 Implement this yourself.
       throw new Error("Method not implemented.");
     }
   }
+
 
   likeThePost = (user_id, post_id): void => {
     const likesFromTheUser = getLikesByUserIdAndPostId(user_id, post_id);
@@ -104,7 +102,10 @@ export class MockPostService implements IPostService {
   }
 
   sortPosts(posts: IPost[]): IPost[] {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    try {
+      return posts.sort((a: any, b: any) => b.createdAt - a.createdAt);
+    } catch (error) {
+      throw new Error("Method not implemented.");
+    }
   }
 }

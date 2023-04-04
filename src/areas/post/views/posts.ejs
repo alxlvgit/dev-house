@@ -179,25 +179,21 @@
               </div>
             </div>
 
-            <div class="w-7/8 p-3 pl-0">
-              <div class="flex justify-between">
-                <div>
-                  <span class="font-bold"><a href="#" class="text-black">
-                      <%= post.username %>
-                    </a></span>
-                  <span class="text-grey-dark">&middot;</span>
-                  <span class="text-grey-dark">
-                    <%= post.createdAt %>
-                  </span>
-                  <span class="inline-block">
-                    <form action="/delete" method="post">
-                      <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
-                      <button type="submit"><i
-                          class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
-                    </form>
 
-                  </span>
-                </div>
+          <div class="w-7/8 p-3 pl-0">
+            <div class="flex justify-between">
+              <div>
+                <span class="font-bold"><a href="#" class="text-black"> <%= post.username %> </a></span>
+                <span class="text-grey-dark">&middot;</span>
+                <span class="text-grey-dark"><%= post.createdAt %></span>
+                <span class="inline-block">
+                  <form action="/posts/<%= post.postId %>/delete" method="post">
+                    <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
+                    <button type="submit"><i class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
+                  </form>
+                  
+                </span>
+              </div>
 
               </div>
               <div>
@@ -207,12 +203,12 @@
                   </p>
                 </div>
                 <div class="pb-2">
-                  <span class="mr-8"><a href="/posts/<%= post.id %>"
+                  <span class="mr-8"><a href="/posts/<%= post.postId %>"
                       class="text-grey-dark hover:no-underline hover:text-blue-light"><i
                         class="fa fa-comment fa-lg mr-2"></i>
                       <%= post.comments.length %>
                     </a></span>
-                  <span class="mr-8"><a href="/posts/<%= post.id %>/like"
+                  <span class="mr-8"><a href="/posts/<%= post.postId %>/like"
                       class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2"></i>
                       <%= post.likes %>
                     </a></span>

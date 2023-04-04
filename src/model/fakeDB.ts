@@ -77,21 +77,21 @@ const database: IDatabase = {
       message: "Hi there 2",
       userId: "2",
       createdAt: new Date(),
-      comments: ["3001", "3002"],
+      comments: ["3003"],
     },
     {
       id: "1003",
       message: "Should show up 2/4: User's following",
       userId: "3",
       createdAt: new Date("March 13, 2021 04:20"),
-      comments: ["3001", "3002"],
+      comments: ["3004", "3005", "3006"],
     },
     {
       id: "1004",
       message: "test post",
       userId: "4",
       createdAt: new Date("October 2, 2021 11:05"),
-      comments: ["3001", "3002"],
+      comments: [],
     },
     {
       id: "1005",
@@ -113,7 +113,7 @@ const database: IDatabase = {
     {
       id: "3001",
       postId: "1001",
-      userId: "1",
+      userId: "3",
       createdAt: new Date(),
       message: "this is a new comment",
       username: "billgates"
@@ -123,9 +123,8 @@ const database: IDatabase = {
       postId: "1001",
       userId: "2",
       createdAt: new Date(),
-      message: "this is one more comment",
-      username: "james123"
-    },
+      username:"james123"
+    }
   ],
 
   likes: [

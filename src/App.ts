@@ -26,7 +26,7 @@ class App {
   private initializeMiddlewares() {
     require("./middleware/express.middlewares")(this._app);
     require("./middleware/passport.middlewares")(this._app);
-
+    
     // For debugging purposes
     this._app.use((req, res, next) => {
       console.log(`User details are: `);

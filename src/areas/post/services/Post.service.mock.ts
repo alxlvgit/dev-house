@@ -6,10 +6,8 @@ import {
   getLikesByPostId,
   getPostByPostId,
   getPostByUserId,
+  getLikesByUserIdAndPostId
 } from "../../../areas/helpers/helpers";
-
-
-import { getUsernameByUserId, getLikesByPostId, getLikesByUserIdAndPostId } from "../../../areas/helpers/helpers";
 
 export class MockPostService implements IPostService {
   addPost(post: IPost, username: string): void {
@@ -23,8 +21,7 @@ export class MockPostService implements IPostService {
     } catch (error) {
       throw new Error("Method not implemented.");
     }
->>>>>>> 057f411 (make post like/unlike functional)
-        }
+  }
 
   getAllPosts(username: string): IPost[] {
     try {
@@ -34,16 +31,16 @@ export class MockPostService implements IPostService {
         if (username === user.username) {
           for (const post of user.posts) {
             if (getPostByUserId(user.id)) {
-              posts.
-              push({ ...getPostByPostId(post) });
+              posts.push({ ...getPostByPostId(post) });
             }
             for (const following of user.following) {
-              const userName = getUsernameByUserId(following);
               if (getPostByUserId(following)) {
                 posts.push({ ...getPostByUserId(following) });
               }
             }
           }
+        } else {
+          continue;
         }
 
         for (const post of posts) {

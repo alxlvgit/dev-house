@@ -1,30 +1,28 @@
 import passport from "passport";
 import { PassportStrategy } from "../../../interfaces/passport.strategy.interface";
-import { MockAuthenticationService } from "../services/Authentication.service.mock";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from '../services';
-import IUser from '../../../interfaces/user.interface';
 
 // Passport Configuration Class
 export default class PassportConfig {
-    constructor(strategies: PassportStrategy[]) {
-        this.addStrategies(strategies);
-    }
+  constructor(strategies: PassportStrategy[]) {
+    this.addStrategies(strategies);
+  }
 
-    private addStrategies(strategies: PassportStrategy[]): void {
-        strategies.forEach((passportStrategy: PassportStrategy) => {
-            passport.use(passportStrategy.name, passportStrategy.strategy);
-        });
-    }
+  private addStrategies(strategies: PassportStrategy[]): void {
+    strategies.forEach((passportStrategy: PassportStrategy) => {
+      passport.use(passportStrategy.name, passportStrategy.strategy);
+    });
+  }
 }
 
 // Local Strategy Configuration Class
 export class LocalStrategyConfig {
-    private static _authService: IAuthenticationService;
+  private static _authService: IAuthenticationService;
 
-    constructor(authService: IAuthenticationService) {
-        LocalStrategyConfig._authService = authService;
-    }
+  constructor(authService: IAuthenticationService) {
+    LocalStrategyConfig._authService = authService;
+  }
 
   private configStrategy(): Strategy {
     return new LocalStrategy(

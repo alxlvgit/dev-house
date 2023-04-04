@@ -28,7 +28,8 @@ export class MockSearchService implements ISearchService {
 
     searchUsers(searchTerm: string, username: string): IUser[] {
         const users = database.users;
-        const usersSearchResult = users.filter(user => (user.firstName.toUpperCase()).includes(searchTerm.toUpperCase()) || (user.lastName.toUpperCase()).includes(searchTerm.toUpperCase()));
+        const usersSearchResult = users.filter(user =>
+            ((user.firstName.toUpperCase()).includes(searchTerm.toUpperCase()) || (user.lastName.toUpperCase()).includes(searchTerm.toUpperCase())) && user.username !== username);
         return usersSearchResult.length > 0 ? this.getUsersEnhanced(username, usersSearchResult) : null;
     }
 

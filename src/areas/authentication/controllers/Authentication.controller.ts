@@ -34,7 +34,6 @@ class AuthenticationController implements IController {
     res.render("authentication/views/register");
   };
 
-  // 🔑 These Authentication methods needs to be implemented by you
   private login = () => {
     return passport.authenticate("local", {
       failureRedirect: `${this.path}/login`,

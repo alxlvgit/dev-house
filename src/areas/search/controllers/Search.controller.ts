@@ -21,8 +21,8 @@ export class SearchController implements IController {
     }
 
     private getSearchResults = (req: Request, res: Response) => {
-        const foundPosts = this._searchService.searchPosts(`${req.query.search}`, req.user.username);
-        const foundUsers = this._searchService.searchUsers(`${req.query.search}`, req.user.username);
+        const foundPosts = this._searchService.searchPosts(`${req.query.search}`, (req.user as any).username);
+        const foundUsers = this._searchService.searchUsers(`${req.query.search}`, (req.user as any).username);
         if (foundPosts || foundUsers) {
             res.render("search/views/search", { posts: foundPosts, users: foundUsers });
         } else {
@@ -31,7 +31,7 @@ export class SearchController implements IController {
     };
 
     private followUnfollowTheUser = (req: Request, res: Response) => {
-        this._searchService.followUnfollowTheUser(req.params.user_id, req.user.username);
+        this._searchService.followUnfollowTheUser(req.params.user_id, (req.user as any).username);
         res.redirect("back");
     }
 }

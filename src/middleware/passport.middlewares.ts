@@ -6,7 +6,7 @@ import PassportConfig, { LocalStrategyConfig } from "../areas/authentication/con
 module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
-  const LocalStrategyConfiguration = new LocalStrategyConfig(new MockAuthenticationService());
-  const LocalStrategyConfigured = LocalStrategyConfiguration.getConfiguredStrategy();
-  new PassportConfig([LocalStrategyConfigured]);
+  const localStrategyConfiguration = new LocalStrategyConfig(new MockAuthenticationService());
+  const localStrategyConfigured = localStrategyConfiguration.getConfiguredStrategy();
+  new PassportConfig([localStrategyConfigured]);
 };

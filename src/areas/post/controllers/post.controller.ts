@@ -19,12 +19,11 @@ class PostController implements IController {
     this.router.get(this.path, ensureAuthenticated, this.getAllPosts);
     this.router.get(`${this.path}/:id`, ensureAuthenticated, this.getPostById);
     this.router.get(`${this.path}/:id/like`, ensureAuthenticated, this.likePost);
-    this.router.post(`${this.path}/:id/delete`, this.deletePost);
-    this.router.post(`${this.path}/:id/comment`, this.createComment);
-    this.router.post(`${this.path}`, this.createPost);
+    this.router.post(`${this.path}/:id/delete`, ensureAuthenticated, this.deletePost);
+    this.router.post(`${this.path}/:id/comment`, ensureAuthenticated, this.createComment);
+    this.router.post(`${this.path}`, ensureAuthenticated, this.createPost);
   }
 
-  // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   private getAllPosts = (req: Request, res: Response) => {
     // @ts-ignore
     const username = req.user.username;
@@ -35,7 +34,6 @@ class PostController implements IController {
     res.render("post/views/posts", { posts: updatedPosts, user: req.user });
   };
 
-  // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
 
@@ -77,18 +75,18 @@ class PostController implements IController {
 
   private likePost = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
-    this._postService.likeThePost(req.user.id, postId);
-    console.log(database.likes);
+    this._postService.likeThePost((req.user as any).id, postId);
     this.getAllPosts(req, res);
   }
 
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
-    const userId = req.user.id;
+    const userId = (req.user as any).id;
     const message = req.body.commentText;
     this._postService.addCommentToPost(message, userId, postId);
     this.getPostById(req, res, next);
   };
- 
+}
+
 export default PostController;
 

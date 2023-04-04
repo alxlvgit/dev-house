@@ -72,3 +72,8 @@ Royce Coviello:
 1. 
 2. 
 3.
+
+# April 4th (Fixth Sprint Complete)
+Selina Park:
+I worked on the following tasks:
+1. Debugging post functionality (when create new posts and delele new post, it takes oldest post to the top).

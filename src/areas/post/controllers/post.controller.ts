@@ -68,7 +68,6 @@ class PostController implements IController {
       createdAt: new Date(),
       comments: [],
     };
-
     this._postService.addPost(post, username);
     res.redirect("/posts");
   };

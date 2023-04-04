@@ -33,24 +33,20 @@ export class MockPostService implements IPostService {
             if (getPostByUserId(user.id)) {
               posts.push({ ...getPostByPostId(post) });
             }
-            for (const following of user.following) {
-              if (getPostByUserId(following)) {
-                posts.push({ ...getPostByUserId(following) });
-              }
+          }
+          for (const following of user.following) {
+            if (getPostByUserId(following)) {
+              posts.push({ ...getPostByUserId(following) });
             }
           }
-        } else {
-          continue;
         }
-
         for (const post of posts) {
           const likes = getLikesByPostId(post.id);
           post.likes = likes;
         }
-
-        // hack to fix delete issue for now
-        return this.sortPosts(posts).filter((obj) => obj.id);
       }
+      // hack to fix delete issue for now
+      return this.sortPosts(posts).filter((obj) => obj.id);
     } catch (error) {
       throw new Error("Method not implemented.");
     }

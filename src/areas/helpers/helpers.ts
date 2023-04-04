@@ -1,10 +1,24 @@
 import { database } from "../../model/fakeDB";
 
+interface postCreatorFullName {
+  fname: string;
+  lname: string;
+}
+
 export const getUsernameByUserId = (user_id): string => {
   const users = database.users;
   for (const user of users) {
     if (user_id === user.id) {
       return user.firstName;
+    }
+  }
+};
+
+export const getFnameLnameByUserId = (user_id): postCreatorFullName => {
+  const users = database.users;
+  for (const user of users) {
+    if (user_id === user.id) {
+      return { fname: user.firstName, lname: user.lastName };
     }
   }
 };

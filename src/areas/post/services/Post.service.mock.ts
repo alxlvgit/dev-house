@@ -39,6 +39,8 @@ export class MockPostService implements IPostService {
               posts.push({ ...getPostByUserId(following) });
             }
           }
+        } else {
+          continue
         }
         for (const post of posts) {
           const likes = getLikesByPostId(post.id);

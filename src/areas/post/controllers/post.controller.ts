@@ -3,7 +3,7 @@ import { ensureAuthenticated } from "../../../middleware/authentication.middlewa
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { PostViewModel } from "../viewmodels/post.viewmodel";
-// import { post, posts } from "../../../model/fakeDB";
+import { database } from "../../../model/fakeDB";
 
 class PostController implements IController {
   public path = "/posts";
@@ -17,7 +17,8 @@ class PostController implements IController {
 
   private initializeRoutes() {
     this.router.get(this.path, ensureAuthenticated, this.getAllPosts);
-    this.router.get(`${this.path}/:id`, this.getPostById);
+    this.router.get(`${this.path}/:id`, ensureAuthenticated, this.getPostById);
+    this.router.get(`${this.path}/:id/like`, ensureAuthenticated, this.likePost);
     // this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, ensureAuthenticated, this.createComment);
     // this.router.post(`${this.path}`, this.createPost);
@@ -36,10 +37,18 @@ class PostController implements IController {
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
+
     const post = this._postService.findById(postId);
     const postVM = new PostViewModel(post);
     res.render("post/views/post", { post: postVM });
   };
+
+  private likePost = async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params.id;
+    this._postService.likeThePost(req.user.id, postId);
+    console.log(database.likes);
+    this.getAllPosts(req, res);
+  }
 
   // // 🚀 These post methods needs to be implemented by you
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
@@ -50,7 +59,8 @@ class PostController implements IController {
     this.getPostById(req, res, next);
   };
   // private createPost = async (req: Request, res: Response, next: NextFunction) => {};
-  // private deletePost = async (req: Request, res: Response, next: NextFunction) => {};
+  // private deletePost = async (req: Request, res: Response, next: NextFunction) => { 
+  // };
 }
 
 export default PostController;

@@ -212,8 +212,8 @@
                         class="fa fa-comment fa-lg mr-2"></i>
                       <%= post.comments.length %>
                     </a></span>
-                  <span class="mr-8"><a href="#" class="text-grey-dark hover:no-underline hover:text-red"><i
-                        class="fa fa-heart fa-lg mr-2"></i>
+                  <span class="mr-8"><a href="/posts/<%= post.id %>/like"
+                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2"></i>
                       <%= post.likes %>
                     </a></span>
                 </div>

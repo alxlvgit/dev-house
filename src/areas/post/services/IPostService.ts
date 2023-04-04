@@ -10,5 +10,9 @@ export default interface IPostService {
 
   findById(id: string): IPost | undefined;
 
+  likeThePost(
+    user_id: string, post_id: string
+  )
+
   addCommentToPost(message: string, userId: string, postId: string): void;
 }

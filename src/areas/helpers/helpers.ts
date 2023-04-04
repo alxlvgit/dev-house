@@ -1,4 +1,10 @@
+import ILikes from "../../interfaces/likes.interface";
 import { database } from "../../model/fakeDB";
+
+interface postCreatorFullName {
+  fname: string;
+  lname: string;
+}
 
 const getUsernameByUserId = (user_id: string): string | null => {
   const user = database.users.find((user) => user.id === user_id);
@@ -20,8 +26,27 @@ const getPostByUserId = (user_id): object => {
   return post ? post : null;
 };
 
+const getFnameLnameByUserId = (user_id): postCreatorFullName => {
+  const users = database.users;
+  for (const user of users) {
+    if (user_id === user.id) {
+      return { fname: user.firstName, lname: user.lastName };
+    }
+  }
+};
+
+
 const getUserIdByUsername = (username: string): string => {
   const user = database.users.find((user) => user.username === username);
   return user ? user.id : null;
 };
-export { getUsernameByUserId, getLikesByPostId, getPostByPostId, getPostByUserId, getUserIdByUsername };
+
+
+const getLikesByUserIdAndPostId = (user_id, post_id): ILikes => {
+  const likes = database.likes;
+  const result = likes.filter((like) => like.user_id === user_id && like.post_id === post_id);
+  return result.length > 0 ? result[0] : null;
+}
+
+export { getUsernameByUserId, getLikesByPostId, getPostByPostId, getPostByUserId, getUserIdByUsername,getFnameLnameByUserId, getLikesByUserIdAndPostId };
+

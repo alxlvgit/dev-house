@@ -88,7 +88,7 @@ const database: IDatabase = {
     },
     {
       id: "1004",
-      message: "Should show up 3/4: User's following",
+      message: "test post",
       userId: "4",
       createdAt: new Date("October 2, 2021 11:05"),
       comments: [],
@@ -115,43 +115,16 @@ const database: IDatabase = {
       postId: "1001",
       userId: "3",
       createdAt: new Date(),
-      message: "this comment is for Bill from Doe 1/2",
+      message: "this is a new comment",
+      username: "billgates"
     },
     {
       id: "3002",
       postId: "1001",
       userId: "2",
       createdAt: new Date(),
-      message: "this comment is for Bill from James 2/2",
-    },
-    {
-      id: "3003",
-      postId: "1002",
-      userId: "1",
-      createdAt: new Date(),
-      message: "this comment is for James from Bill 1/1",
-    },
-    {
-      id: "3004",
-      postId: "1003",
-      userId: "1",
-      createdAt: new Date(),
-      message: "this comment is for Doe from Bill 1/3",
-    },
-    {
-      id: "3005",
-      postId: "1003",
-      userId: "4",
-      createdAt: new Date(),
-      message: "this comment is for Doe from Selina 2/3",
-    },
-    {
-      id: "3006",
-      postId: "1003",
-      userId: "5",
-      createdAt: new Date(),
-      message: "this comment is for Doe from Xiao 3/3",
-    },
+      username:"james123"
+    }
   ],
 
   likes: [

@@ -31,13 +31,13 @@ class PostController implements IController {
     const updatedPosts = posts.map((post) => {
       return new PostViewModel(post);
     });
-
     res.render("post/views/posts", { posts: updatedPosts, user: req.user });
   };
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary post object
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
+
     const post = this._postService.findById(postId);
     const postVM = new PostViewModel(post);
     res.render("post/views/post", { post: postVM });
@@ -74,13 +74,20 @@ class PostController implements IController {
     res.redirect("/posts");
   };
 
-  // // 🚀 These post methods needs to be implemented by you
-  // private createComment = async (req: Request, res: Response, next: NextFunction) => {};
-}
+  private likePost = async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params.id;
+    this._postService.likeThePost(req.user.id, postId);
+    console.log(database.likes);
+    this.getAllPosts(req, res);
+  }
+
+  private createComment = async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params.id;
+    const userId = req.user.id;
+    const message = req.body.commentText;
+    this._postService.addCommentToPost(message, userId, postId);
+    this.getPostById(req, res, next);
+  };
+ 
 export default PostController;
 
-/*
-Problems: 
-1. Delete: Cannot delete newly created posts.
-2. Create: cannot create new posts after deleting all posts.
-*/

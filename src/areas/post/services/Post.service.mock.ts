@@ -8,6 +8,9 @@ import {
   getPostByUserId,
 } from "../../../areas/helpers/helpers";
 
+
+import { getUsernameByUserId, getLikesByPostId, getLikesByUserIdAndPostId } from "../../../areas/helpers/helpers";
+
 export class MockPostService implements IPostService {
   addPost(post: IPost, username: string): void {
     try {
@@ -68,17 +71,41 @@ export class MockPostService implements IPostService {
     }
   }
 
+
+  likeThePost = (user_id, post_id): void => {
+    const likesFromTheUser = getLikesByUserIdAndPostId(user_id, post_id);
+    if (!likesFromTheUser) {
+      database.likes.push({ user_id, post_id });
+      console.log("You have liked the post");
+    } else {
+      console.log("Removed like from the post");
+      const likeIndex = database.likes.findIndex((like) => like.user_id === user_id && like.post_id === post_id);
+      database.likes.splice(likeIndex, 1);
+    }
+  }
+
+  addCommentToPost(message: string, userId: string, postId: string): void {
+    const maxId = Math.max(...database.comments.map(comment => parseInt(comment.id)));
+    const newId = (maxId + 1).toString();
+    const username = database.users.find(user => user.id == userId).username;
+    const newComment = {
+      id: newId,
+      createdAt: new Date(),
+      userId: userId,
+      postId: postId,
+      message: message,
+      username: username
+    }
+    database.comments.push(newComment);
+    const post = database.posts.find(post => post.id == postId);
+    post.comments.push(newId);
+  }
+
   sortPosts(posts: IPost[]): IPost[] {
     try {
       return posts.sort((a: any, b: any) => b.createdAt - a.createdAt);
     } catch (error) {
       throw new Error("Method not implemented.");
     }
-  }
-
-  //NOT DONE 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
   }
 }

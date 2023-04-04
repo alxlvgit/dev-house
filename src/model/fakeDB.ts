@@ -88,7 +88,7 @@ const database: IDatabase = {
     },
     {
       id: "1004",
-      message: "Should show up 3/4: User's following",
+      message: "test post",
       userId: "4",
       createdAt: new Date("October 2, 2021 11:05"),
       comments: ["3001", "3002"],
@@ -116,6 +116,7 @@ const database: IDatabase = {
       userId: "1",
       createdAt: new Date(),
       message: "this is a new comment",
+      username: "billgates"
     },
     {
       id: "3002",
@@ -123,6 +124,7 @@ const database: IDatabase = {
       userId: "2",
       createdAt: new Date(),
       message: "this is one more comment",
+      username: "james123"
     },
   ],
 

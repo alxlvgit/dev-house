@@ -3,23 +3,29 @@ import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
 import bcrypt from "bcrypt";
+import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
+
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
   // database: any;
 
-  public getUserByEmailAndPassword(email: string, password: string): IUser | null {
-    const userFoundByEmail = this.findUserByEmail(email);
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null> {
+    const userFoundByEmail = await this.findUserByEmail(email);
     if (userFoundByEmail) {
       if (userFoundByEmail.password === password) {
         return userFoundByEmail;
       }
-      throw new Error("Password is wrong. Please try again");
+      throw new WrongCredentialsException();
     }
   }
 
-  public findUserByEmail(email: string): IUser | null {
-    const user = this._db.users.find((user) => user.email === email);
-    return user || null;
+  public async findUserByEmail(email: String): Promise<IUser | null> {
+    const user = await this._db.users.find(user => user.email === email);
+    if (user) {
+      return user;
+    } else {
+      throw new WrongCredentialsException();
+    }
   }
 
   private users: IUser[];
@@ -28,12 +34,12 @@ export class MockAuthenticationService implements IAuthenticationService {
     this.users = [];
   }
 
-  public async createUser(user: IUser): Promise<IUser> {
+  public async createUser(user: IUser): Promise<IUser | null> {
     // check if email has been used
     const existingUser = this.users.find((u) => u.email === user.email);
     if (existingUser) {
       console.error(`User with email ${user.email} already exists`);
-      return false;
+      return null;
     } else {
       // hash password
       const saltRounds = 10;

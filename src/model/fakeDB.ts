@@ -10,7 +10,7 @@ const database: IDatabase = {
       firstName: "Bill",
       lastName: "Gates",
       following: ["3", "4", "5"],
-      posts: ["1001"],
+      posts: ["1001"]
     },
     {
       id: "2",
@@ -20,7 +20,7 @@ const database: IDatabase = {
       firstName: "James",
       lastName: "Smith",
       following: ["1"],
-      posts: ["1002"],
+      posts: ["1002"]
     },
     {
       id: "3",
@@ -30,7 +30,7 @@ const database: IDatabase = {
       firstName: "Doe",
       lastName: "Don",
       following: ["2"],
-      posts: ["1003"],
+      posts: ["1003"]
     },
     {
       id: "4",
@@ -40,7 +40,7 @@ const database: IDatabase = {
       firstName: "Selina",
       lastName: "Park",
       following: ["3"],
-      posts: ["1004"],
+      posts: ["1004"]
     },
     {
       id: "5",
@@ -50,7 +50,7 @@ const database: IDatabase = {
       firstName: "Xiao",
       lastName: "Zhang",
       following: ["3"],
-      posts: ["1005"],
+      posts: ["1005"]
     },
     {
       id: "6",
@@ -60,8 +60,8 @@ const database: IDatabase = {
       firstName: "Niki",
       lastName: "Zhang",
       following: ["4"],
-      posts: ["1006"],
-    },
+      posts: ["1006"]
+    }
   ],
 
   posts: [
@@ -77,21 +77,21 @@ const database: IDatabase = {
       message: "Hi there 2",
       userId: "2",
       createdAt: new Date(),
-      comments: ["3001", "3002"],
+      comments: ["3003"],
     },
     {
       id: "1003",
       message: "Should show up 2/4: User's following",
       userId: "3",
       createdAt: new Date("March 13, 2021 04:20"),
-      comments: ["3001", "3002"],
+      comments: ["3004", "3005", "3006"],
     },
     {
       id: "1004",
-      message: "Should show up 3/4: User's following",
+      message: "test post",
       userId: "4",
       createdAt: new Date("October 2, 2021 11:05"),
-      comments: ["3001", "3002"],
+      comments: [],
     },
     {
       id: "1005",
@@ -106,24 +106,58 @@ const database: IDatabase = {
       userId: "6",
       createdAt: new Date(),
       comments: [],
-    },
+    }
   ],
 
   comments: [
     {
       id: "3001",
       postId: "1001",
-      userId: "1",
+      userId: "3",
       createdAt: new Date(),
       message: "this is a new comment",
+      username: "billgates"
     },
     {
       id: "3002",
       postId: "1001",
       userId: "2",
       createdAt: new Date(),
-      message: "this is one more comment",
+      message: "this is a new comment",
+      username: "james123"
     },
+    {
+      id: "3003",
+      postId: "1002",
+      userId: "1",
+      createdAt: new Date(),
+      message: "this is a new comment",
+      username: "billgates"
+    },
+    {
+      id: "3004",
+      postId: "1003",
+      userId: "4",
+      createdAt: new Date(),
+      message: "this is a new comment",
+      username: "selinapark"
+    },
+    {
+      id: "3005",
+      postId: "1003",
+      userId: "5",
+      createdAt: new Date(),
+      message: "this is a new comment",
+      username: "xiaoxiao"
+    },
+    {
+      id: "3006",
+      postId: "1003",
+      userId: "6",
+      createdAt: new Date(),
+      message: "this is a new comment",
+      username: "Niki1234"
+    }
   ],
 
   likes: [

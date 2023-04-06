@@ -7,12 +7,14 @@ import WrongCredentialsException from "../../../exceptions/WrongCredentialsExcep
 
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
-  // database: any;
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null> {
     const userFoundByEmail = await this.findUserByEmail(email);
     if (userFoundByEmail) {
-      if (userFoundByEmail.password === password) {
+      const bcryptPrefix = /^\$2b\$/;
+      const passwordEncrypted = bcryptPrefix.test(userFoundByEmail.password);
+      let passwordVerified = passwordEncrypted ? await bcrypt.compare(password, userFoundByEmail.password) : password === userFoundByEmail.password;
+      if (passwordVerified) {
         return userFoundByEmail;
       }
       throw new WrongCredentialsException();

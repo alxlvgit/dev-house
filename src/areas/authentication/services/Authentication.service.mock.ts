@@ -1,26 +1,27 @@
 import { database } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
+import WrongCredentialsException from "../../../exceptions/WrongCredentialsException";
 
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
 
-  public getUserByEmailAndPassword(email: string, password: string): IUser | null {
-    const userFoundByEmail = this.findUserByEmail(email);
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null> {
+    const userFoundByEmail = await this.findUserByEmail(email);
     if (userFoundByEmail) {
       if (userFoundByEmail.password === password) {
         return userFoundByEmail;
       }
-      throw new Error("Password is wrong. Please try again");
+      throw new WrongCredentialsException();
     }
   }
 
-  public findUserByEmail(email: String): IUser | null {
-    const user = this._db.users.find(user => user.email === email);
+  public async findUserByEmail(email: String): Promise<IUser | null> {
+    const user = await this._db.users.find(user => user.email === email);
     if (user) {
       return user;
     } else {
-      throw new Error("User with that email doesn't exist");
+      throw new WrongCredentialsException();
     }
   }
 

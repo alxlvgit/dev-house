@@ -6,7 +6,7 @@ import {
   getLikesByPostId,
   getPostByPostId,
   getPostByUserId,
-  getLikesByUserIdAndPostId
+  getLikesByUserIdAndPostId,
 } from "../../../areas/helpers/helpers";
 
 export class MockPostService implements IPostService {
@@ -40,15 +40,17 @@ export class MockPostService implements IPostService {
             }
           }
         } else {
-          continue
+          continue;
         }
         for (const post of posts) {
           const likes = getLikesByPostId(post.id);
           post.likes = likes;
         }
       }
-      // hack to fix delete issue for now
-      return this.sortPosts(posts).filter((obj) => obj.id);
+      const finalPosts = posts.filter((post) => post.id);
+
+      debugger;
+      return this.sortPosts(finalPosts).filter((obj) => obj.id);
     } catch (error) {
       throw new Error("Method not implemented.");
     }
@@ -67,7 +69,6 @@ export class MockPostService implements IPostService {
     }
   }
 
-
   likeThePost = (user_id, post_id): void => {
     const likesFromTheUser = getLikesByUserIdAndPostId(user_id, post_id);
     if (!likesFromTheUser) {
@@ -78,22 +79,22 @@ export class MockPostService implements IPostService {
       const likeIndex = database.likes.findIndex((like) => like.user_id === user_id && like.post_id === post_id);
       database.likes.splice(likeIndex, 1);
     }
-  }
+  };
 
   addCommentToPost(message: string, userId: string, postId: string): void {
-    const maxId = Math.max(...database.comments.map(comment => parseInt(comment.id)));
+    const maxId = Math.max(...database.comments.map((comment) => parseInt(comment.id)));
     const newId = (maxId + 1).toString();
-    const username = database.users.find(user => user.id == userId).username;
+    const username = database.users.find((user) => user.id == userId).username;
     const newComment = {
       id: newId,
       createdAt: new Date(),
       userId: userId,
       postId: postId,
       message: message,
-      username: username
-    }
+      username: username,
+    };
     database.comments.push(newComment);
-    const post = database.posts.find(post => post.id == postId);
+    const post = database.posts.find((post) => post.id == postId);
     post.comments.push(newId);
   }
 

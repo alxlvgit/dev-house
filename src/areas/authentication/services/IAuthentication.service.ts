@@ -7,7 +7,7 @@ export interface IAuthenticationService {
 
   findUserByEmail(email: String): Promise<IUser | null>;
 
-  createUser(user: IUser): Promise<IUser>;
+  createUser(user): Promise<IUser>;
 
   getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null>;
 }

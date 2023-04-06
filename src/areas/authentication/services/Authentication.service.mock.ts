@@ -20,7 +20,7 @@ export class MockAuthenticationService implements IAuthenticationService {
   }
 
   public async findUserByEmail(email: String): Promise<IUser | null> {
-    const user = await this._db.users.find(user => user.email === email);
+    const user = await this._db.users.find((user) => user.email === email);
     if (user) {
       return user;
     } else {
@@ -28,33 +28,29 @@ export class MockAuthenticationService implements IAuthenticationService {
     }
   }
 
-  private users: IUser[];
-
-  constructor() {
-    this.users = [];
-  }
-
-  public async createUser(user: IUser): Promise<IUser | null> {
+  public async createUser(user): Promise<IUser | null> {
     // check if email has been used
-    const existingUser = this.users.find((u) => u.email === user.email);
+    const existingUser = this._db.users.find((u) => u.email === user.email);
     if (existingUser) {
       console.error(`User with email ${user.email} already exists`);
-      return null;
+      throw new EmailAlreadyExistsException(user.email);
     } else {
       // hash password
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(user.password, saltRounds);
       const newUser: IUser = {
-        id: (this.users.length + 1).toString(),
+        id: (this._db.users.length + 1).toString(),
         ...user,
         password: hashedPassword,
         following: [],
         posts: [],
       };
       // add user to db
-      database.users.push(newUser);
-      console.log(database.users);
+      this._db.users.push(newUser);
+      console.log(this._db.users);
       return newUser;
     }
   }
 }
+
+

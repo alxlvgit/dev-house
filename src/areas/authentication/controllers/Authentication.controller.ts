@@ -4,7 +4,6 @@ import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
 import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
-
 class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
@@ -31,8 +30,14 @@ class AuthenticationController implements IController {
     res.render("authentication/views/login", { errorMessage: null });
   };
 
-  private showRegistrationPage = (_: express.Request, res: express.Response) => {
-    res.render("authentication/views/register", { error: null });
+  private showRegistrationPage = (req: express.Request, res: express.Response) => {
+    const messages = (req.session as any).messages ? (req.session as any).messages : undefined;
+    if (messages) {
+      const latestMessage = messages[messages.length - 1];
+      delete (req.session as any).messages;
+      res.render("authentication/views/register", { error: latestMessage });
+    }
+    res.render("authentication/views/register", { error:null });
   };
 
   private login = async (req: express.Request, res: express.Response) => {
@@ -50,29 +55,15 @@ class AuthenticationController implements IController {
       const { email, password, firstName, lastName } = req.body;
       // creates username based on email address
       const username = email.split("@")[0];
-      const userExists = await this.service.findUserByEmail(email);
-      if (userExists) {
-        throw new EmailAlreadyExistsException(email);
-      }
       const user = await this.service.createUser({ username, email, password, firstName, lastName });
-      // redirect to login page
-      res.redirect("login");
+      this.login(req, res);
     } catch (error) {
-      next(error)
-      console.error(error);
+      next(error);
+      (req.session as any).messages = [error.message];
       // render the error to the user
-      res.render("authentication/views/register", { error: error.message });
+      res.redirect("/auth/register");
     }
   };
-
-  //  // login user (can be swapped with redirect to login)
-  //     req.login(user, (err) => {
-  //       if (err) {
-  //         next(err);
-  //       } else {
-  //         res.redirect("/posts");
-  //       }
-  //     });
 
   private logout = (req: express.Request, res: express.Response) => {
     req.logout((err: any) => {

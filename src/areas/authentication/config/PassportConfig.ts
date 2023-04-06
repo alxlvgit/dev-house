@@ -1,7 +1,15 @@
-import passport from "passport";
+import passport, { DoneCallback } from "passport";
 import { PassportStrategy } from "../../../interfaces/passport.strategy.interface";
 import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import { IAuthenticationService } from '../services';
+import IUser from '../../../interfaces/user.interface';
+
+declare global {
+  namespace Express {
+    interface User extends IUser {
+    }
+  }
+}
 
 // Passport Configuration Class
 export default class PassportConfig {
@@ -30,9 +38,9 @@ export class LocalStrategyConfig {
         usernameField: "email",
         passwordField: "password",
       },
-      (email, password, done) => {
+      async (email, password, done) => {
         try {
-          const user = LocalStrategyConfig._authService.getUserByEmailAndPassword(email, password);
+          const user = await LocalStrategyConfig._authService.getUserByEmailAndPassword(email, password);
           return done(null, user);
         } catch (error) {
           return done(null, false, { message: error.message });
@@ -48,9 +56,9 @@ export class LocalStrategyConfig {
   }
 
   private deserializeUser(): void {
-    passport.deserializeUser(function (email: string, done: (error: any, user: Express.User | false | null) => void) {
+    passport.deserializeUser(async function (email: string, done: (error: any, user: Express.User | false | null) => void) {
       try {
-        const user = LocalStrategyConfig._authService.findUserByEmail(email);
+        const user = await LocalStrategyConfig._authService.findUserByEmail(email);
         return done(null, user);
       } catch (error) {
         return done(error.message, undefined);

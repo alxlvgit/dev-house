@@ -43,8 +43,8 @@ class PostController implements IController {
   };
 
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {
-    const postId = req.params.id;
     const posts = database.posts;
+    const postId = req.params.id;
     const index = database.posts.findIndex((post) => post.id === postId);
     if (index !== -1) {
       posts.splice(index, 1);
@@ -76,7 +76,7 @@ class PostController implements IController {
     const postId = req.params.id;
     this._postService.likeThePost((req.user as any).id, postId);
     this.getAllPosts(req, res);
-  }
+  };
 
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
@@ -88,4 +88,3 @@ class PostController implements IController {
 }
 
 export default PostController;
-

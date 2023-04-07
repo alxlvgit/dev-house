@@ -53,6 +53,9 @@ class AuthenticationController implements IController {
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
       const { email, password, firstName, lastName } = req.body;
+      if (password.length < 8) {
+        throw new Error("Password should be at least 8 characters long");
+      }
       // creates username based on email address
       const username = email.split("@")[0];
       await this.service.createUser({ username, email, password, firstName, lastName });
@@ -67,7 +70,7 @@ class AuthenticationController implements IController {
 
   private logout = (req: express.Request, res: express.Response) => {
     req.logout((err: any) => {
-      res.redirect("/");
+      res.redirect("/auth/login");
     });
   };
 }

@@ -35,8 +35,9 @@ class AuthenticationController implements IController {
       const latestMessage = messages[messages.length - 1];
       delete (req.session as any).messages;
       res.render("authentication/views/register", { error: latestMessage });
+    } else {
+      res.render("authentication/views/register", { error: null });
     }
-    res.render("authentication/views/register", { error: null });
   };
 
   private login = async (req: express.Request, res: express.Response) => {

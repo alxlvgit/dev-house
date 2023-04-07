@@ -34,7 +34,6 @@ export class MockAuthenticationService implements IAuthenticationService {
     // check if email has been used
     const existingUser = this._db.users.find((u) => u.email === user.email);
     if (existingUser) {
-      console.error(`User with email ${user.email} already exists`);
       throw new EmailAlreadyExistsException(user.email);
     } else {
       // hash password

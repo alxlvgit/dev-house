@@ -22,9 +22,9 @@ class AuthenticationController implements IController {
   private showLoginPage = (req: express.Request, res: express.Response) => {
     const messages = (req.session as any).messages ? (req.session as any).messages : undefined;
     if (messages) {
-      const latestMessage = messages[messages.length - 1];
+      const errorMessage = messages[messages.length - 1];
       delete (req.session as any).messages;
-      res.render("authentication/views/login", { errorMessage: latestMessage });
+      res.render("authentication/views/login", { errorMessage: errorMessage });
     } else {
       res.render("authentication/views/login", { errorMessage: null });
     }
@@ -33,21 +33,29 @@ class AuthenticationController implements IController {
   private showRegistrationPage = (req: express.Request, res: express.Response) => {
     const messages = (req.session as any).messages ? (req.session as any).messages : undefined;
     if (messages) {
-      const latestMessage = messages[messages.length - 1];
+      const errorMessage = messages[messages.length - 1];
       delete (req.session as any).messages;
-      res.render("authentication/views/register", { error: latestMessage });
+      res.render("authentication/views/register", { error: errorMessage });
     } else {
       res.render("authentication/views/register", { error: null });
     }
   };
 
-  private login = async (req: express.Request, res: express.Response) => {
-    const authenticated = await passport.authenticate("local", {
-      failureRedirect: `${this.path}/login`,
-      failureMessage: true,
-      successRedirect: `/posts`,
-    });
-    return authenticated(req, res);
+  private login = async (req: express.Request, res: express.Response, next: NextFunction) => {
+    passport.authenticate('local', function (err, user, info) {
+      if (err) {
+        res.redirect(`/auth/login`);
+        return next(err);
+      }
+      if (!user) {
+        (req.session as any).messages = [info.message];
+        return res.redirect('/auth/login');
+      }
+      req.login(user, function (err) {
+        if (err) { return next(err); }
+        return res.redirect('/posts');
+      });
+    })(req, res, next);
   };
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -59,7 +67,7 @@ class AuthenticationController implements IController {
       // creates username based on email address
       const username = email.split("@")[0];
       await this.service.createUser({ username, email, password, firstName, lastName });
-      this.login(req, res);
+      this.login(req, res, next);
     } catch (error) {
       next(error);
       (req.session as any).messages = [error.message];

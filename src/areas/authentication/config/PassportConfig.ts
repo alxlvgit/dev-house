@@ -61,7 +61,7 @@ export class LocalStrategyConfig {
         const user = await LocalStrategyConfig._authService.findUserByEmail(email);
         return done(null, user);
       } catch (error) {
-        return done(error.message, undefined);
+        return done(error, undefined);
       }
     });
   }

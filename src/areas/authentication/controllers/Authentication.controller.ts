@@ -1,9 +1,8 @@
 import express, { NextFunction } from "express";
-import { forwardAuthenticated } from "../../../middleware/authentication.middleware";
+import { ensureAuthenticated, forwardAuthenticated } from "../../../middleware/authentication.middleware";
 import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
-import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
 class AuthenticationController implements IController {
   public path = "/auth";
   public router = express.Router();
@@ -13,11 +12,11 @@ class AuthenticationController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/register`, this.showRegistrationPage);
-    this.router.post(`${this.path}/register`, this.registration);
+    this.router.get(`${this.path}/register`, forwardAuthenticated, this.showRegistrationPage);
+    this.router.post(`${this.path}/register`, forwardAuthenticated, this.registration);
     this.router.get(`${this.path}/login`, forwardAuthenticated, this.showLoginPage);
-    this.router.post(`${this.path}/login`, this.login);
-    this.router.get(`${this.path}/logout`, this.logout);
+    this.router.post(`${this.path}/login`, forwardAuthenticated, this.login);
+    this.router.get(`${this.path}/logout`, ensureAuthenticated, this.logout);
   }
 
   private showLoginPage = (req: express.Request, res: express.Response) => {
@@ -37,7 +36,7 @@ class AuthenticationController implements IController {
       delete (req.session as any).messages;
       res.render("authentication/views/register", { error: latestMessage });
     }
-    res.render("authentication/views/register", { error:null });
+    res.render("authentication/views/register", { error: null });
   };
 
   private login = async (req: express.Request, res: express.Response) => {

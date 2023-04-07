@@ -49,18 +49,17 @@ class AuthenticationController implements IController {
   };
 
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.log(req.body);
     try {
       const { email, password, firstName, lastName } = req.body;
       // creates username based on email address
       const username = email.split("@")[0];
-      const user = await this.service.createUser({ username, email, password, firstName, lastName });
+      await this.service.createUser({ username, email, password, firstName, lastName });
       this.login(req, res);
     } catch (error) {
       next(error);
       (req.session as any).messages = [error.message];
       // render the error to the user
-      res.redirect("/auth/register");
+      res.redirect(`${this.path}/register`);
     }
   };
 

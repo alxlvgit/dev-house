@@ -52,7 +52,10 @@ class AuthenticationController implements IController {
         return res.redirect('/auth/login');
       }
       req.login(user, function (err) {
-        if (err) { return next(err); }
+        if (err) { 
+          res.redirect(`/auth/login`);
+          return next(err);
+        }
         return res.redirect('/posts');
       });
     })(req, res, next);

@@ -3,7 +3,6 @@ import { ensureAuthenticated } from "../../../middleware/authentication.middlewa
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { PostViewModel } from "../viewmodels/post.viewmodel";
-import { database } from "../../../model/fakeDB";
 
 class PostController implements IController {
   public path = "/posts";
@@ -24,10 +23,10 @@ class PostController implements IController {
     this.router.post(`${this.path}`, ensureAuthenticated, this.createPost);
   }
 
-  private getAllPosts = (req: Request, res: Response) => {
+  private getAllPosts = async (req: Request, res: Response) => {
     // @ts-ignore
     const username = req.user.username;
-    const posts = this._postService.getAllPosts(username);
+    const posts = await this._postService.getAllPosts(username);
     const updatedPosts = posts.map((post) => {
       return new PostViewModel(post);
     });
@@ -36,19 +35,14 @@ class PostController implements IController {
 
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
-
-    const post = this._postService.findById(postId);
+    const post = await this._postService.findById(postId);
     const postVM = new PostViewModel(post);
     res.render("post/views/post", { post: postVM });
   };
 
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {
-    const posts = database.posts;
     const postId = req.params.id;
-    const index = database.posts.findIndex((post) => post.id === postId);
-    if (index !== -1) {
-      posts.splice(index, 1);
-    }
+    await this._postService.deletePost(postId);
     res.redirect("/posts");
   };
 
@@ -74,16 +68,16 @@ class PostController implements IController {
 
   private likePost = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
-    this._postService.likeThePost((req.user as any).id, postId);
-    this.getAllPosts(req, res);
+    await this._postService.likeThePost((req.user as any).id, postId);
+    await this.getAllPosts(req, res);
   };
 
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.id;
     const userId = (req.user as any).id;
     const message = req.body.commentText;
-    this._postService.addCommentToPost(message, userId, postId);
-    this.getPostById(req, res, next);
+    await this._postService.addCommentToPost(message, userId, postId);
+    await this.getPostById(req, res, next);
   };
 }
 

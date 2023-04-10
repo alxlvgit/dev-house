@@ -161,11 +161,11 @@ const database: IDatabase = {
   ],
 
   likes: [
-    { user_id: "1", post_id: "1002" },
-    { user_id: "2", post_id: "1002" }, //Bill -> James
-    { user_id: "4", post_id: "1002" },
-    { user_id: "3", post_id: "1001" }, //Doe -> Bill
-    { user_id: "4", post_id: "1001" },
+    { user_id: "1", postId: "1002" },
+    { user_id: "2", postId: "1002" }, //Bill -> James
+    { user_id: "4", postId: "1002" },
+    { user_id: "3", postId: "1001" }, //Doe -> Bill
+    { user_id: "4", postId: "1001" },
   ],
 };
 

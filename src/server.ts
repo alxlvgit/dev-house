@@ -8,12 +8,13 @@ import { SearchController } from "./areas/search/controllers/Search.controller";
 import { MockSearchService } from "./areas/search/services/Search.service.mock";
 import { PrismaClient } from '@prisma/client';
 import { AuthenticationService } from "./areas/authentication/services/Authentication.service";
+import { database } from "./model/fakeDB";
 
 const server = new App([
   new LandingController(),
-  new PostController(new MockPostService()),
-  new SearchController(new MockSearchService(new MockPostService())),
-  new AuthenticationController(new AuthenticationService(new PrismaClient())),
+  new PostController(new PostService(new PrismaClient())),
+  new SearchController(new MockSearchService(new MockPostService(database))),
+  new AuthenticationController(new AuthenticationService(database)),
 ]);
 
 server.start();

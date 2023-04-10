@@ -1,6 +1,6 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
-import { database } from "../../../model/fakeDB";
+
 import {
   getUsernameByUserId,
   getLikesByPostId,
@@ -10,12 +10,18 @@ import {
 } from "../../../areas/helpers/helpers";
 
 export class MockPostService implements IPostService {
+  _db: any;
+
+  constructor(database: any) {
+    this._db = database;
+  }
+
   addPost(post: IPost, username: string): void {
     try {
-      database.posts.push(post);
-      for (let i = 0; i < database.users.length; i++) {
-        if (database.users[i].username === username) {
-          database.users[i].posts.push(post.id);
+      this._db.posts.push(post);
+      for (let i = 0; i < this._db.users.length; i++) {
+        if (this._db.users[i].username === username) {
+          this._db.users[i].posts.push(post.id);
         }
       }
     } catch (error) {
@@ -27,7 +33,7 @@ export class MockPostService implements IPostService {
     try {
       let posts = [];
 
-      for (const user of database.users) {
+      for (const user of this._db.users) {
         if (username === user.username) {
           for (const post of user.posts) {
             if (getPostByUserId(user.id)) {
@@ -48,6 +54,7 @@ export class MockPostService implements IPostService {
         }
       }
       const finalPosts = posts.filter((post) => post.id);
+      console.log(finalPosts);
 
       debugger;
       return this.sortPosts(finalPosts).filter((obj) => obj.id);
@@ -58,10 +65,10 @@ export class MockPostService implements IPostService {
 
   findById(post_id: string): IPost {
     try {
-      const post = database.posts.find((post) => post.id == post_id);
+      const post = this._db.posts.find((post) => post.id == post_id);
       const clonedPost = { ...post };
       clonedPost.comments = post.comments.map((commentId) =>
-        database.comments.find((comment) => comment.id == commentId)
+        this._db.comments.find((comment) => comment.id == commentId)
       );
       return clonedPost;
     } catch {
@@ -71,20 +78,22 @@ export class MockPostService implements IPostService {
 
   likeThePost = (user_id, post_id): void => {
     const likesFromTheUser = getLikesByUserIdAndPostId(user_id, post_id);
+    console.log(likesFromTheUser, "likesFromTheUser");
+
     if (!likesFromTheUser) {
-      database.likes.push({ user_id, post_id });
+      this._db.likes.push({ user_id, postId: post_id });
       console.log("You have liked the post");
     } else {
       console.log("Removed like from the post");
-      const likeIndex = database.likes.findIndex((like) => like.user_id === user_id && like.post_id === post_id);
-      database.likes.splice(likeIndex, 1);
+      const likeIndex = this._db.likes.findIndex((like) => like.user_id === user_id && like.postId === post_id);
+      this._db.likes.splice(likeIndex, 1);
     }
   };
 
   addCommentToPost(message: string, userId: string, postId: string): void {
-    const maxId = Math.max(...database.comments.map((comment) => parseInt(comment.id)));
+    const maxId = Math.max(...this._db.comments.map((comment) => parseInt(comment.id)));
     const newId = (maxId + 1).toString();
-    const username = database.users.find((user) => user.id == userId).username;
+    const username = this._db.users.find((user) => user.id == userId).username;
     const newComment = {
       id: newId,
       createdAt: new Date(),
@@ -93,8 +102,8 @@ export class MockPostService implements IPostService {
       message: message,
       username: username,
     };
-    database.comments.push(newComment);
-    const post = database.posts.find((post) => post.id == postId);
+    this._db.comments.push(newComment);
+    const post = this._db.posts.find((post) => post.id == postId);
     post.comments.push(newId);
   }
 
@@ -103,6 +112,14 @@ export class MockPostService implements IPostService {
       return posts.sort((a: any, b: any) => b.createdAt - a.createdAt);
     } catch (error) {
       throw new Error("Method not implemented.");
+    }
+  }
+
+  deletePost(post_id: string): void {
+    const posts = this._db.posts;
+    const index = this._db.posts.findIndex((post) => post.id === post_id);
+    if (index !== -1) {
+      posts.splice(index, 1);
     }
   }
 }

@@ -11,10 +11,9 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Following" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "followerId" INTEGER NOT NULL,
     "followingId" INTEGER NOT NULL,
-    CONSTRAINT "Following_followerId_fkey" FOREIGN KEY ("followerId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Following_followingId_fkey" FOREIGN KEY ("followingId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "followerId" INTEGER NOT NULL,
+    CONSTRAINT "Following_followerId_fkey" FOREIGN KEY ("followerId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -51,3 +50,9 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Following_followingId_followerId_key" ON "Following"("followingId", "followerId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Like_postId_userId_key" ON "Like"("postId", "userId");

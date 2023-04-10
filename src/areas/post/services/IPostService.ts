@@ -1,18 +1,20 @@
 import IPost from "../../../interfaces/post.interface";
 
-// ⭐️ Feel free to change this interface in any way you like. It is simply an example...
 export default interface IPostService {
+  _db: any;
+
   addPost(post: IPost, username: string): void;
 
-  sortPosts(posts: IPost[]): IPost[];
+  sortPosts?(posts: IPost[]): IPost[];
 
-  getAllPosts(username: string): IPost[];
+  getAllPosts(username: string): IPost[] | Promise<IPost[]>;
 
-  findById(id: string): IPost | undefined;
+  findById(id: string): IPost | Promise<IPost>;
 
   likeThePost(
     user_id: string, post_id: string
   )
+  deletePost(postId: string): void;
 
   addCommentToPost(message: string, userId: string, postId: string): void;
 }

@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  firstName String
+  lastName  String
+  posts     Post[]    @relation("UserPosts")
+  comments  Comment[] @relation("UserComments")
+  likes     Like[]    @relation("UserLikes")
+  followers Following[] @relation("Following")
+  following Following[] @relation("Follower")
+}
+
+model Following {
+  id        Int       @id @default(autoincrement())
+  follower  User      @relation("Follower", fields: [followerId], references: [id])
+  followerId Int
+  following User      @relation("Following", fields: [followingId], references: [id])
+  followingId Int
+}
+
+model Post {
+  id          Int        @id @default(autoincrement())
+  message     String
+  createdAt   DateTime  @default(now())
+  user        User       @relation("UserPosts", fields: [userId], references: [id])
+  userId      Int
+  comments    Comment[] @relation("PostComments")
+  likes       Like[]    @relation("PostLikes")
+}
+
+model Comment {
+  id          Int        @id @default(autoincrement())
+  message     String
+  createdAt   DateTime  @default(now())
+  post        Post      @relation("PostComments", fields: [postId], references: [id])
+  postId      Int
+  user        User      @relation("UserComments", fields: [userId], references: [id])
+  userId      Int
+}
+
+model Like {
+  id          Int        @id @default(autoincrement())
+  post        Post      @relation("PostLikes", fields: [postId], references: [id])
+  postId      Int
+  user        User      @relation("UserLikes", fields: [userId], references: [id])
+  userId      Int
+}

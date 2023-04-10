@@ -52,7 +52,7 @@ class AuthenticationController implements IController {
         return res.redirect('/auth/login');
       }
       req.login(user, function (err) {
-        if (err) { 
+        if (err) {
           res.redirect(`/auth/login`);
           return next(err);
         }
@@ -81,6 +81,9 @@ class AuthenticationController implements IController {
 
   private logout = (req: express.Request, res: express.Response) => {
     req.logout((err: any) => {
+      if (err) {
+        console.log(err);
+      }
       res.redirect("/auth/login");
     });
   };

@@ -61,7 +61,7 @@ export class LocalStrategyConfig {
         const user = await LocalStrategyConfig._authService.findUserByEmail(email);
         return done(null, user);
       } catch (error) {
-        return done(error, undefined);
+        return done(new Error("Couldn't deserialize user"), undefined);
       }
     });
   }

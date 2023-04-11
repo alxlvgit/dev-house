@@ -7,12 +7,14 @@ import WrongCredentialsException from "../../../exceptions/WrongCredentialsExcep
 
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
-  // database: any;
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser | null> {
     const userFoundByEmail = await this.findUserByEmail(email);
     if (userFoundByEmail) {
-      if (userFoundByEmail.password === password) {
+      const bcryptPrefix = /^\$2b\$/;
+      const passwordEncrypted = bcryptPrefix.test(userFoundByEmail.password);
+      let passwordVerified = passwordEncrypted ? await bcrypt.compare(password, userFoundByEmail.password) : password === userFoundByEmail.password;
+      if (passwordVerified) {
         return userFoundByEmail;
       }
       throw new WrongCredentialsException();
@@ -32,7 +34,6 @@ export class MockAuthenticationService implements IAuthenticationService {
     // check if email has been used
     const existingUser = this._db.users.find((u) => u.email === user.email);
     if (existingUser) {
-      console.error(`User with email ${user.email} already exists`);
       throw new EmailAlreadyExistsException(user.email);
     } else {
       // hash password

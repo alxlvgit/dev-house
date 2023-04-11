@@ -73,8 +73,22 @@ Royce Coviello:
 2. 
 3.
 
-# April 4th (Fixth Sprint Complete)
+# April 10th (Fifth Sprint Complete)
 Selina Park:
 I worked on the following tasks:
 1. Debugging post functionality (when create new posts and delele new post, it takes oldest post to the top).
 2. Created styling branch and start working on css.
+
+Oleksandr Levchuk:
+I worked on the following tasks:
+1. Fixed minor bugs after merging the main branch with new features. 
+2. Auth error handling - directed the auth-related errors to the error middleware.
+3. Created a new branch `db/prisma`. Currently, Auth and Post services have the full support of sqlite/prisma. Remaining tasks on branch:
+- refactor Auth and Post services.
+- add sqlite/prisma support for Search services.
+
+Royce Coviello:
+I worked on the following tasks:
+1. 
+2. 
+3.

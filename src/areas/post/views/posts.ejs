@@ -159,8 +159,8 @@
             <img class="w-12 h-12 rounded-full"
               src="https://user-images.githubusercontent.com/76543451/103982284-0a6f0b00-5138-11eb-872b-0b9e70fc5c25.gif" />
             <form class="w-full" action="/posts" method="POST">
-              <input class="w-9/12 bg-gray-200 rounded-full px-3 py-2" name="postText"
-                placeholder="What's on your mind, john?" />
+              <input class="w-9/12 bg-pink-100 rounded-full px-3 py-2" name="postText"
+                placeholder="What's on your mind?" />
               <input
                 class="transition duration-500 ease-in-out hover:bg-red-600 transform w-2/12 rounded-full p-2 bg-gray-800 cursor-pointer text-gray-200"
                 type="submit" value="Post">
@@ -216,7 +216,8 @@
                       <%= post.comments.length %>
                     </a></span>
                   <span class="mr-8"><a href="/posts/<%= post.postId %>/like"
-                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2"></i>
+                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2 text-pink-500"></i>
+
                       <%= post.likes %>
                     </a></span>
                 </div>

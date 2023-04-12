@@ -22,9 +22,7 @@
         <div class="flex items-center justify-between p-2">
           <!-- Navbar left -->
           <div class="flex items-center space-x-3">
-            <a href="/" class="flex items-center space-x-2">
-              <span class="text-2xl font-semibold tracking-wider uppercase">devHouse</span>
-            </a>
+            <span class="p-2 text-xl font-semibold tracking-wider uppercase">devHouse</span>
           </div>
 
           <!-- Mobile search box -->
@@ -159,8 +157,8 @@
             <img class="w-12 h-12 rounded-full"
               src="https://user-images.githubusercontent.com/76543451/103982284-0a6f0b00-5138-11eb-872b-0b9e70fc5c25.gif" />
             <form class="w-full" action="/posts" method="POST">
-              <input class="w-9/12 bg-pink-100 rounded-full px-3 py-2" name="postText"
-                placeholder="What's on your mind?" />
+              <input class="w-9/12 bg-gray-200 rounded-full px-3 py-2" name="postText"
+                placeholder="What's on your mind, john?" />
               <input
                 class="transition duration-500 ease-in-out hover:bg-red-600 transform w-2/12 rounded-full p-2 bg-gray-800 cursor-pointer text-gray-200"
                 type="submit" value="Post">
@@ -182,25 +180,20 @@
             </div>
 
 
-            <div class="w-7/8 p-3 pl-0">
-              <div class="flex justify-between">
-                <div>
-                  <span class="font-bold"><a href="#" class="text-black">
-                      <%= post.username %>
-                    </a></span>
-                  <span class="text-grey-dark">&middot;</span>
-                  <span class="text-grey-dark">
-                    <%= post.createdAt %>
-                  </span>
-                  <span class="inline-block">
-                    <form action="/posts/<%= post.postId %>/delete" method="post">
-                      <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
-                      <button type="submit"><i
-                          class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
-                    </form>
-
-                  </span>
-                </div>
+          <div class="w-7/8 p-3 pl-0">
+            <div class="flex justify-between">
+              <div>
+                <span class="font-bold"><a href="#" class="text-black"> <%= post.username %> </a></span>
+                <span class="text-grey-dark">&middot;</span>
+                <span class="text-grey-dark"><%= post.createdAt %></span>
+                <span class="inline-block">
+                  <form action="/posts/<%= post.postId %>/delete" method="post">
+                    <input type="hidden" value="<%= post.postId %>" name="postToDelete" />
+                    <button type="submit"><i class="transition duration-500 ease-in-out hover:bg-gray-300 transform p-5 rounded-full fa fa-trash"></i></button>
+                  </form>
+                  
+                </span>
+              </div>
 
               </div>
               <div>
@@ -216,8 +209,7 @@
                       <%= post.comments.length %>
                     </a></span>
                   <span class="mr-8"><a href="/posts/<%= post.postId %>/like"
-                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2 text-pink-500"></i>
-
+                      class="text-grey-dark hover:no-underline hover:text-red"><i class="fa fa-heart fa-lg mr-2"></i>
                       <%= post.likes %>
                     </a></span>
                 </div>

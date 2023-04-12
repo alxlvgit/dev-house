@@ -72,6 +72,7 @@ Royce Coviello:
 I worked on the following tasks:
 1. Password hashing on new user
 2. Refractoring
+3. Front end sign in error message functionality
 
 # April 10th (Fifth Sprint Complete)
 

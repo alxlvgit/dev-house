@@ -14,6 +14,7 @@ I worked on the following tasks:
 Royce Coviello
 I worked on the following tasks:
 1. Planning out how to create the sign in page
+2. Reviewing provided starter code
 
 # March 13th (Second Sprint Complete)
 
@@ -30,9 +31,8 @@ I worked on the following tasks:
 4. Updated the single post page so that it loads any comments associated with that post.
 
 Royce Coviello:
-1. 
-2. 
-3.
+I worked on the following tasks:
+1. Add basic signin
 
 # March 27th (Third Sprint Complete)
 
@@ -49,9 +49,9 @@ I worked on the following tasks:
 4. Added a feature that allows users to create a new post by clicking on the "post" button. This feature is triggered by an onPOST request to the server.
 
 Royce Coviello:
-1. 
-2. 
-3.
+I worked on the following tasks:
+1. Add added create id and username
+2. Some error handling (check if email exists)
 
 # April 3rd (Fourth Sprint Complete)
 
@@ -69,11 +69,12 @@ I worked on the following tasks:
 3. Fixed showallposts functions by implementing viewmodel. 
 
 Royce Coviello:
-1. 
-2. 
-3.
+I worked on the following tasks:
+1. Password hashing on new user
+2. Refractoring
 
 # April 10th (Fifth Sprint Complete)
+
 Selina Park:
 I worked on the following tasks:
 1. Debugging post functionality (when create new posts and delele new post, it takes oldest post to the top).
@@ -89,6 +90,4 @@ I worked on the following tasks:
 
 Royce Coviello:
 I worked on the following tasks:
-1. 
-2. 
-3.
+1. Added middleware for error logging

@@ -77,7 +77,7 @@ Royce Coviello:
 Selina Park:
 I worked on the following tasks:
 1. Debugging post functionality (when create new posts and delele new post, it takes oldest post to the top).
-2. Created styling branch and start working on css.
+2. Wored on CSS; changed heart-button on posts.ejs and create new post box color to pink colour.
 
 Oleksandr Levchuk:
 I worked on the following tasks:
